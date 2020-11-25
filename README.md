@@ -1,9 +1,11 @@
 # Projet Test et Sécurité
+Pour une meilleure expérience, aller sur https://markdownlivepreview.com et copier coller le contenu de ce fichier.
 
 ## Pré-requis 
-Télécharger nodeJS : https://nodejs.org/en/download/
-Télécharger Vue CLI : npm install -g @vue/cli
-le -g permet de l'installer en global
+Télécharger nodeJS : https://nodejs.org/en/download/  
+Télécharger gitHub : https://git-scm.com/downloads  
+Télécharger Vue CLI : npm install -g @vue/cli  
+le -g permet de l'installer en global  
 
 ## Cloner le repository git
 ```
