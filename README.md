@@ -70,6 +70,7 @@ git push
 ### Avant de quitter le projet sur lequel on travaille
 Vérifier que le master est au même niveau que nous-même :  
 ```
+git switch main
 git checkout  
 ```
 Si ce n'est pas le cas, effectuer les étapes ci-dessus pour se mettre à niveau  
@@ -78,7 +79,7 @@ Si ce n'est pas le cas, effectuer les étapes ci-dessus pour se mettre à niveau
 On se déplace sur la branche master, on récupère la dernière version de la branche master (optionnel),  
 on fusionne notre fonctionnalité puis on supprime notre branche.
 ```
-git checkout master
+git checkout main
 git pull
 git merge NomDeLaFonctionnalite
 git branch -d NomDeLaFonctionnalite
