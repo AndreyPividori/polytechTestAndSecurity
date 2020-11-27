@@ -4,8 +4,7 @@ Pour une meilleure expérience, aller sur https://markdownlivepreview.com et cop
 ## Pré-requis 
 Télécharger nodeJS : https://nodejs.org/en/download/  
 Télécharger gitHub : https://git-scm.com/downloads  
-Télécharger Vue CLI : npm install -g @vue/cli  
-le -g permet de l'installer en global  
+Télécharger Vue CLI : ```npm install -g @vue/cli``` (le -g permet de l'installer en global)
 
 ## Cloner le repository git
 ```
@@ -19,20 +18,68 @@ cd project
 npm install  
 ```
 
-### Compiles and hot-reloads for development
+### Compilation et HotFix pour le développement 
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compilation et HotFix pour la MeP
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Linter
 ```
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Début d'une sessions de travail 
+Chaque fonctionnalitée sera développée sur une branche dédiée à cette fonctionnalité
+
+### Récupération du la dernière version du code
+```
+git pull
+```
+
+### Redirection vers la branche de votrre fonctionnalité
+Si la branche n'existe pas, la créer :  
+```
+git checkout -b NomDeLaFonctionnalite
+```
+Si la branche existe déja, vous avez juste à switcher dessus :  
+```
+git switch NomDeLaFonctionnalite
+```
+
+## Fin d'une session de travail
+Ouvrir un terminal dans le dossier polytechTestAndSecurity  
+
+### A chaque nouvelle partie de fonctionnalité validée
+```
+git add .  
+git commit -m "REF XYZ : Bref descriptif du début de fonctionnalité validé"  
+```
+
+### A chaque nouvelle fonctionnalité validée
+```
+git add .  
+git commit -m "REF XYZ du Cahier des spécification terminée et fonctionnelle"  
+git push  
+```
+
+### Avant de quitter le projet sur lequel on travaille
+Vérifier que le master est au même niveau que nous-même :  
+```
+git checkout  
+```
+Si ce n'est pas le cas, effectuer les étapes ci-dessus pour se mettre à niveau  
+
+### Merge de la fonctionnalité
+On se déplace sur la branche master, on récupère la dernière version de la branche master (optionnel),  
+on fusionne notre fonctionnalité puis on supprime notre branche.
+```
+git checkout master
+git pull
+git merge NomDeLaFonctionnalite
+git branch -d NomDeLaFonctionnalite
+```
