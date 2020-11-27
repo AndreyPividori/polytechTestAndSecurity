@@ -1,5 +1,4 @@
 # Projet Test et Sécurité
-Pour une meilleure expérience, aller sur https://markdownlivepreview.com et copier coller le contenu de ce fichier.
 
 ## Pré-requis 
 Télécharger nodeJS : https://nodejs.org/en/download/  
