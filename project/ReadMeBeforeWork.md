@@ -49,5 +49,6 @@ on fusionne notre fonctionnalité puis on supprime notre branche.
 git checkout main
 git pull
 git merge NomDeLaFonctionnalite
+git push
 git branch -d NomDeLaFonctionnalite
 ```
