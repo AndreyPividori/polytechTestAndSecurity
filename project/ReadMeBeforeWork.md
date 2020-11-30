@@ -35,12 +35,14 @@ git push
 ```
 
 ### Avant de quitter le projet sur lequel on travaille
-Vérifier que le master est au même niveau que nous-même :  
+Vérifier que votre branche et le master est au même niveau que nous-même :  
 ```
+git checkout
 git switch main
 git checkout  
 ```
-Si ce n'est pas le cas, effectuer les étapes ci-dessus pour se mettre à niveau  
+Si ce n'est pas le cas, effectuer les étapes ci-dessus pour se mettre à niveau.  
+A noter que le premier checkout est à effectuer sur votre branche de développement.  
 
 ### Merge de la fonctionnalité
 On se déplace sur la branche master, on récupère la dernière version de la branche master (optionnel),  
