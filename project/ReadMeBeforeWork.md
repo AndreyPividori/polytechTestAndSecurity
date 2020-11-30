@@ -1,4 +1,4 @@
-# Procédure et commandes git pour le travail collaboratig
+# Procédure et commandes git pour le travail collaboratif
 
 ## Début d'une session de travail 
 Chaque fonctionnalitée sera développée sur une branche dédiée à cette fonctionnalité
@@ -8,7 +8,7 @@ Chaque fonctionnalitée sera développée sur une branche dédiée à cette fonc
 git pull
 ```
 
-### Redirection vers la branche de votrre fonctionnalité
+### Redirection vers la branche de votre fonctionnalité
 Si la branche n'existe pas, la créer :  
 ```
 git checkout -b NomDeLaFonctionnalite
