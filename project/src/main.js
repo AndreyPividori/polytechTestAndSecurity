@@ -6,6 +6,7 @@ import firebase from "./firebase.js";
 import { firestorePlugin } from 'vuefire'
 
 Vue.use(firestorePlugin)
+require('@/assets/main.scss');
 
 Vue.config.productionTip = false;
 

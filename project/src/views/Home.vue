@@ -1,22 +1,39 @@
 <template>
   <div class="home">
-    <div>{{aMateriel}}</div>
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+      <thead>
+        <tr>
+          <th><abbr title="Position">Index</abbr></th>
+          <th>Nom</th>
+          <th>Référence</th>
+          <th>N° Téléphone</th>
+          <th>Version</th>
+          <th>Photo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(materiel, index) in aMateriel" :key="index">
+          <td>{{materiel.nom}}</td>
+          <td>{{materiel.ref}}</td>
+          <td>{{materiel.tel}}</td>
+          <td>{{materiel.version}}</td>
+          <td>{{materiel.photo}}</td>
+        </tr>
+      </tbody>
+    </table>
     <button @click="createDoc()">Creer</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 import * as utils from "@/store/utils.js";
 import firebase from "@/firebase.js";
 
 export default {
   name: "Home",
   components: {
-    HelloWorld
+    
   },
   data(){
     return {
