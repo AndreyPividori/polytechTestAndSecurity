@@ -15,12 +15,18 @@
       </thead>
       <tbody>
         <tr v-for="(materiel, index) in aMateriel" :key="index">
-          <td>{{index+1}}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ materiel.nom }}</td>
           <td>{{ materiel.ref }}</td>
           <td>{{ materiel.tel }}</td>
           <td>{{ materiel.version }}</td>
-          <td><img :src="materiel.photo" /></td>
+          <td>
+            <v-img :src="materiel.photo" alt=""
+                contain    
+                height="100px"
+                width="150px">
+            </v-img>
+          </td>
         </tr>
       </tbody>
     </table>
