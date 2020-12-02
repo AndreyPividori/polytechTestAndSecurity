@@ -4,7 +4,9 @@
       <div class="column is-1"></div>
       <listeMateriel class="column is-10" />
       <div class="column is-1">
-        <button id="show-modal" class="button" @click="showModal = true">➕</button>
+        <button id="show-modal" class="button" @click="showModal = true">
+          ➕
+        </button>
         <!-- use the modal component, pass in the prop -->
         <ajouterMateriel v-if="showModal" @close="showModal = false" />
       </div>
@@ -14,12 +16,12 @@
 
 <script>
 // @ is an alias to /src
-import listeMateriel from "@/components/Materiel/ListeMateriel"
-import ajouterMateriel from "@/components/Materiel/ajouterMateriel"
+import listeMateriel from "@/components/Materiel/ListeMateriel";
+import ajouterMateriel from "@/components/Materiel/ajouterMateriel";
 
 export default {
   name: "Home",
-  components: {listeMateriel, ajouterMateriel},
+  components: { listeMateriel, ajouterMateriel },
   data() {
     return {
       aMateriel: [],

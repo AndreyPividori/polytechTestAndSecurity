@@ -14,7 +14,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(materiel, index) in aMateriel" :key="index" :class="'row_' + index">
+        <tr
+          v-for="(materiel, index) in aMateriel"
+          :key="index"
+          :class="'row_' + index"
+        >
           <td>{{ index + 1 }}</td>
           <td>{{ materiel.nom }}</td>
           <td>{{ materiel.ref }}</td>
@@ -22,10 +26,13 @@
           <td>{{ materiel.version }}</td>
           <td class="is-clickable">
             <a :href="materiel.photo">
-              <v-img :src="materiel.photo" alt=""
-                  contain    
-                  height="66px"
-                  width="100px">
+              <v-img
+                :src="materiel.photo"
+                alt=""
+                contain
+                height="66px"
+                width="100px"
+              >
               </v-img>
             </a>
           </td>
@@ -41,11 +48,10 @@ import firebase from "@/firebase.js";
 
 export default {
   name: "ListeMateriel",
-  props: {
-  },
+  props: {},
   data() {
     return {
-      aMateriel: [],
+      aMateriel: []
     };
   },
   computed: {},
@@ -69,5 +75,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>

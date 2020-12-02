@@ -1,62 +1,69 @@
 <template>
   <div class="modal-mask">
-        <div class="modal-wrapper">
-        <div class="modal-container">
+    <div class="modal-wrapper">
+      <div class="modal-container">
+        <div class="modal-header">
+          <slot name="header">
+            <h3 class="title is-4">Ajouter un matériel</h3>
+          </slot>
+        </div>
 
-            <div class="modal-header">
-            <slot name="header">
-                <h3 class="title is-4"> Ajouter un matériel</h3>
-            </slot>
-            </div>
-
-            <div class="modal-body">
-            <slot name="body">
-                <form action="" >
-                    <div class="field has-text-left">
-                        <label class="label">Nom :</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="e.g iPhone 12">
-                        </div>
-                    </div>
-
-                    <div class="field has-text-left">
-                        <label class="label">N° Téléphone :</label>
-                        <div class="control">
-                            <input class="input" type="integer" placeholder="e.g 0611223344">
-                        </div>
-                    </div>
-                    <div class="field has-text-left">
-                        <label class="label">Version :</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="e.g V8.6">
-                        </div>
-                    </div>
-                    <div class="field has-text-left">
-                        <label class="label">Référence :</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="e.g AP12">
-                        </div>
-                    </div>
-                </form>
-            </slot>
-            </div>
-
-            <div class="modal-footer">
-            <slot name="footer">
+        <div class="modal-body">
+          <slot name="body">
+            <form action="">
+              <div class="field has-text-left">
+                <label class="label">Nom :</label>
                 <div class="control">
-                    <button class="button is-primary" @click="$emit('close')">Submit</button>
+                  <input
+                    class="input"
+                    type="text"
+                    placeholder="e.g iPhone 12"
+                  />
                 </div>
-            </slot>
+              </div>
+
+              <div class="field has-text-left">
+                <label class="label">N° Téléphone :</label>
+                <div class="control">
+                  <input
+                    class="input"
+                    type="integer"
+                    placeholder="e.g 0611223344"
+                  />
+                </div>
+              </div>
+              <div class="field has-text-left">
+                <label class="label">Version :</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="e.g V8.6" />
+                </div>
+              </div>
+              <div class="field has-text-left">
+                <label class="label">Référence :</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="e.g AP12" />
+                </div>
+              </div>
+            </form>
+          </slot>
+        </div>
+
+        <div class="modal-footer">
+          <slot name="footer">
+            <div class="control">
+              <button class="button is-primary" @click="$emit('close')">
+                Submit
+              </button>
             </div>
+          </slot>
         </div>
-        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
@@ -114,5 +121,4 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
 </style>
