@@ -2,14 +2,14 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <div>{{doc}}</div>
+    <button @click="createDoc()">Creer</button>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import firebase from "@/firebase.js";
+import * as utils from "@/store/utils.js"
 
 export default {
   name: "Home",
@@ -24,28 +24,12 @@ export default {
   computed: {
   },
   methods: {
-    // function writeUserData(userId, name, email, imageUrl) {
-    //   firebase
-    //     .database()
-    //     .ref("users/" + userId)
-    //     .set({
-    //       username: name,
-    //       email: email,
-    //       profile_picture: imageUrl
-    //     });
-    // }
-    getDoc: async function(){
-      let cityRef = firebase.db.collection('materiel').doc('K8MOGu5nVZ7XxcLTggN5');
-      let doc = await cityRef.get();
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        console.log('Document data:', doc.data());
-      }
+    createDoc: function(){
+      utils.createDoc("materiel", null);
     }
   },
   mounted() {
-    this.getDoc();
+    console.log(utils);
   }
 };
 </script>
