@@ -20,12 +20,14 @@
           <td>{{ materiel.ref }}</td>
           <td>{{ materiel.tel }}</td>
           <td>{{ materiel.version }}</td>
-          <td>
-            <v-img :src="materiel.photo" alt=""
-                contain    
-                height="66px"
-                width="100px">
-            </v-img>
+          <td class="is-clickable">
+            <a :href="materiel.photo">
+              <v-img :src="materiel.photo" alt=""
+                  contain    
+                  height="66px"
+                  width="100px">
+              </v-img>
+            </a>
           </td>
         </tr>
       </tbody>
