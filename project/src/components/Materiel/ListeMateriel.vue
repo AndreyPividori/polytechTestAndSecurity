@@ -23,8 +23,8 @@
           <td>
             <v-img :src="materiel.photo" alt=""
                 contain    
-                height="100px"
-                width="150px">
+                height="66px"
+                width="100px">
             </v-img>
           </td>
         </tr>
