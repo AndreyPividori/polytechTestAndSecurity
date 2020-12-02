@@ -4,12 +4,9 @@
       <div class="column is-1"></div>
       <listeMateriel class="column is-10" />
       <div class="column is-1">
-        <button id="show-modal" @click="showModal = true">Show Modal</button>
+        <button id="show-modal" class="button" @click="showModal = true">➕</button>
         <!-- use the modal component, pass in the prop -->
-        <ajouterMateriel v-if="showModal" @close="showModal = false">
-          
-          <h3 slot="header">custom header</h3>
-        </ajouterMateriel>
+        <ajouterMateriel v-if="showModal" @close="showModal = false" />
       </div>
     </div>
   </div>
