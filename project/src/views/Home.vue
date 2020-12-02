@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted() {
-    console.log(utils);
+    console.log(utils.getAllDocs("materiel"));
   }
 };
 </script>

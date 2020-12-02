@@ -1,5 +1,9 @@
 import firebase from "@/firebase.js";
 
+export async function getAllDocs(collection){
+    return await firebase.db.collection(collection);
+}
+
 /**
  * @function getDoc() : Récupère un élément spécifique d'une collection
  * 
@@ -17,8 +21,8 @@ import firebase from "@/firebase.js";
  *      Version: "V8.0"
  */
 export async function getDoc(collection, id){
-    let materiel = firebase.db.collection(collection).doc(id);
-    let doc = await materiel.get();
+    let uniqDoc = firebase.db.collection(collection).doc(id);
+    let doc = await uniqDoc.get();
     if (!doc.exists) {
       console.log('No such document!');
     } else {
