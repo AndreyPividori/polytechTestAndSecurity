@@ -17,12 +17,9 @@ export default {
     HelloWorld
   },
   data(){
-    return {
-      doc : "doc"
-    }
+    return {}
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     createDoc: function(){
       utils.createDoc("materiel", null);
