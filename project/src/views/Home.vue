@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table
+      class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+    >
       <thead>
         <tr>
           <th><abbr title="Position">Index</abbr></th>
@@ -13,11 +15,12 @@
       </thead>
       <tbody>
         <tr v-for="(materiel, index) in aMateriel" :key="index">
-          <td>{{materiel.nom}}</td>
-          <td>{{materiel.ref}}</td>
-          <td>{{materiel.tel}}</td>
-          <td>{{materiel.version}}</td>
-          <td>{{materiel.photo}}</td>
+          <td>{{index+1}}</td>
+          <td>{{ materiel.nom }}</td>
+          <td>{{ materiel.ref }}</td>
+          <td>{{ materiel.tel }}</td>
+          <td>{{ materiel.version }}</td>
+          <td><img :src="materiel.photo" /></td>
         </tr>
       </tbody>
     </table>
@@ -32,25 +35,24 @@ import firebase from "@/firebase.js";
 
 export default {
   name: "Home",
-  components: {
-    
-  },
-  data(){
+  components: {},
+  data() {
     return {
       aMateriel: []
-    }
+    };
   },
   computed: {},
   methods: {
-    createDoc: function(){
+    createDoc: function() {
       utils.createDoc("materiel", null);
     },
-    getAllDocsFromCollection: function(collection){
-      firebase.db.collection(collection)
-      .get()
-      .then(querySnapshot => {
-        this.aMateriel = querySnapshot.docs.map(doc => doc.data())
-      })
+    getAllDocsFromCollection: function(collection) {
+      firebase.db
+        .collection(collection)
+        .get()
+        .then(querySnapshot => {
+          this.aMateriel = querySnapshot.docs.map(doc => doc.data());
+        });
     }
   },
   mounted() {
