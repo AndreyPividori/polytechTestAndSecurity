@@ -1,9 +1,5 @@
 import firebase from "@/firebase.js";
 
-export async function getAllDocs(collection){
-    return await firebase.db.collection(collection);
-}
-
 /**
  * @function getDoc() : Récupère un élément spécifique d'une collection
  * 
