@@ -1,15 +1,11 @@
 <template>
   <div>
-      This is an Admin page.
+    This is an Admin page.
   </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

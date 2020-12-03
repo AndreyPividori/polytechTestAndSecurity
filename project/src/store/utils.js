@@ -51,7 +51,6 @@ export async function createDoc(collection, data) {
 }
 
 export function filterInt(value) {
-  if (/^(-|\+)?(\d+|Infinity)$/.test(value))
-    return Number(value);
+  if (/^(-|\+)?(\d+|Infinity)$/.test(value)) return Number(value);
   return NaN;
 }

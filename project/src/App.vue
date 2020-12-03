@@ -29,9 +29,9 @@
     &.router-link-exact-active {
       color: #42b983;
     }
-  };
+  }
   a:hover {
-    color: rgba(66, 185, 131,0.6);
+    color: rgba(66, 185, 131, 0.6);
   }
 }
 </style>
