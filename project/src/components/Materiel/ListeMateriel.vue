@@ -1,6 +1,8 @@
 <template>
   <div class="liste-materiel">
+    <Loading v-if="isAllDocumentLoading"/>
     <table
+      v-else
       class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
     >
       <thead>
@@ -52,21 +54,22 @@
 <script>
 import * as utils from "@/store/utils.js";
 import firebase from "@/firebase.js";
+import Loading from "@/components/Utils/Loading";
 
 export default {
   name: "ListeMateriel",
   props: {},
+  components:{Loading},
   data() {
     return {
-      aMateriel: []
+      aMateriel: [],
+      isAllDocumentLoading: false
     };
   },
   computed: {},
   methods: {
-    createDoc: function() {
-      utils.createDoc("materiel", null);
-    },
     getAllDocsFromCollection: function(collection) {
+      this.isAllDocumentLoading = true
       firebase.db
         .collection(collection)
         .get()
@@ -77,6 +80,7 @@ export default {
           });
           this.aMateriel = tempDoc;
         });
+      this.isAllDocumentLoading = false
     },
     goToMaterial(keyDoc, docDatas) {
       this.$router.push({
