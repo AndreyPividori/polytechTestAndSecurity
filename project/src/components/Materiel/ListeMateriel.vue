@@ -17,8 +17,12 @@
         <tr v-for="(materiel, index) in aMateriel"
           :key="index"
           :class="'is-clickable row_' + index"
-          @click="goToMaterial(materiel.id)">
-          <td>{{ index + 1 }}</td>
+          @click="goToMaterial(materiel.id, materiel)">
+          <td>
+            {{ index + 1}} 
+            <span v-if="materiel.available" class="tag is-success">Disponible</span>
+            <span v-else class="tag is-danger">Indisponible</span>
+          </td>
           <td>{{ materiel.nom }}</td>
           <td>{{ materiel.ref }}</td>
           <td>{{ materiel.tel }}</td>
@@ -70,8 +74,8 @@ export default {
             this.aMateriel = tempDoc;
         });
     },
-    goToMaterial(keyDoc) {
-      this.$router.push({ name: 'Materiel', params: { id: keyDoc } });
+    goToMaterial(keyDoc, docDatas) {
+      this.$router.push({name: 'Materiel', params: { id: keyDoc, oDatas: docDatas } });
   }
   },
   mounted() {

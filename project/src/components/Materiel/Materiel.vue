@@ -1,6 +1,5 @@
 <template>
   <div>
-      Vous vous trouvez sur le document {{this.$route.params.id}}
   </div>
 </template>
 
@@ -8,7 +7,16 @@
 import firebase from "@/firebase.js";
 export default {
     name: "Materiel",
-    props: {id: String},
+    props: {
+        id: {
+            type: String,
+            default: ''
+        },
+        oDatas: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
             }
