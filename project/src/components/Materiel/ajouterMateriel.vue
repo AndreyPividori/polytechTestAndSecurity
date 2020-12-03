@@ -18,6 +18,7 @@
                     class="input"
                     type="text"
                     placeholder="e.g iPhone 12"
+                    id="new-material-name"
                   />
                 </div>
               </div>
@@ -29,20 +30,37 @@
                     class="input"
                     type="integer"
                     placeholder="e.g 0611223344"
+                    id="new-material-tel"
                   />
                 </div>
               </div>
+
               <div class="field has-text-left">
                 <label class="label">Version :</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="e.g V8.6" />
+                  <input class="input" type="text" placeholder="e.g V8.6" id="new-material-version"/>
                 </div>
               </div>
+
               <div class="field has-text-left">
                 <label class="label">Référence :</label>
                 <div class="control">
-                  <input class="input" type="text" placeholder="e.g AP12" />
+                  <input class="input" type="text" placeholder="e.g AP12" id="new-material-ref" />
                 </div>
+              </div>
+
+              <div class="field has-text-left">
+                <label class="label">Importer un image :</label>
+                <div >
+                  <v-btn @click="click1">...</v-btn>
+                  <input type="file" ref="input1"
+                    style="display: none"
+                    @change="previewImage" accept="image/*" >                
+                </div>
+                <div v-if="imageData!=null">                     
+                  <img class="preview" height="268" width="356" :src="img1">
+                  <br>
+                </div> 
               </div>
             </form>
           </slot>
@@ -51,7 +69,7 @@
         <div class="modal-footer">
           <slot name="footer">
             <div class="control">
-              <button class="button is-primary" @click="$emit('close')">
+              <button class="button is-primary" @click="createDoc()">
                 Submit
               </button>
             </div>
@@ -70,11 +88,56 @@ export default {
   props: {},
   data(){
     return {
-
+      caption : '',
+      img1: '',
+      imageData: null,
+      oData: {
+        nom : "",
+        ref : "",
+        version : "",
+        tel : "",
+        photo: ""
+      }
     }
   },
   methods: {
+    createDoc: async function() {
+      this.oData.nom = document.getElementById("new-material-name").value;
+      this.oData.ref = document.getElementById("new-material-ref").value;
+      this.oData.tel = document.getElementById("new-material-tel").value;
+      this.oData.version = document.getElementById("new-material-version").value;
+      console.log(this.oData);
+      await firebase.db.collection("materiel")
+                        .doc()
+                        .set(this.oData);
+      this.$emit('close')
+    },
 
+    click1() {
+      this.$refs.input1.click()   
+    },
+
+    previewImage(event) {
+      this.uploadValue=0;
+      this.img1=null;
+      this.imageData = event.target.files[0];
+      this.onUpload()
+    }, 
+    onUpload(){
+      this.img1=null;
+      let storageRef = firebase.storage.ref("Photo_Materiel/"+`${this.imageData.name}`).put(this.imageData);
+      storageRef.on(`state_changed`,snapshot=>{
+      this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        }, error=>{console.log(error.message)},
+      ()=>{this.uploadValue=100;
+          storageRef.snapshot.ref.getDownloadURL().then((url)=>{
+              this.img1 = url;
+              this.oData.photo = url;
+              console.log("url : " +this.img1)
+            });
+          }      
+        );
+    }
   },
   mounted(){
     console.log(firebase.storage);
