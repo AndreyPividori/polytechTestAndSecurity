@@ -34,8 +34,11 @@ const routes = [
   {
     path: "/materiel/:id",
     name: "Materiel",
-    component: () => import(/* webpackChunkName: "about" */ "../components/Materiel/Materiel.vue"),
-    props: true,
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "../components/Materiel/Materiel.vue"
+      ),
+    props: true
   }
 ];
 

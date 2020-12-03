@@ -14,13 +14,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(materiel, index) in aMateriel"
+        <tr
+          v-for="(materiel, index) in aMateriel"
           :key="index"
           :class="'is-clickable row_' + index"
-          @click="goToMaterial(materiel.id, materiel)">
+          @click="goToMaterial(materiel.id, materiel)"
+        >
           <td>
-            {{ index + 1}} 
-            <span v-if="materiel.available" class="tag is-success">Disponible</span>
+            {{ index + 1 }}
+            <span v-if="materiel.available" class="tag is-success"
+              >Disponible</span
+            >
             <span v-else class="tag is-danger">Indisponible</span>
           </td>
           <td>{{ materiel.nom }}</td>
@@ -68,15 +72,18 @@ export default {
         .get()
         .then(querySnapshot => {
           console.log(querySnapshot.docs);
-            let tempDoc = querySnapshot.docs.map((doc) => {
-              return { id: doc.id, ...doc.data() }
-            })
-            this.aMateriel = tempDoc;
+          let tempDoc = querySnapshot.docs.map(doc => {
+            return { id: doc.id, ...doc.data() };
+          });
+          this.aMateriel = tempDoc;
         });
     },
     goToMaterial(keyDoc, docDatas) {
-      this.$router.push({name: 'Materiel', params: { id: keyDoc, oDatas: docDatas } });
-  }
+      this.$router.push({
+        name: "Materiel",
+        params: { id: keyDoc, oDatas: docDatas }
+      });
+    }
   },
   mounted() {
     this.getAllDocsFromCollection("materiel");
