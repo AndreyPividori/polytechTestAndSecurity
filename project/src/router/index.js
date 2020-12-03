@@ -30,6 +30,13 @@ const routes = [
     name: "Administration",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Admin.vue")
+  },
+  {
+    path: "/materiel/:id",
+    name: "Materiel",
+    props: { default: true, sidebar: false },
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../components/Materiel/Materiel.vue")
   }
 ];
 
