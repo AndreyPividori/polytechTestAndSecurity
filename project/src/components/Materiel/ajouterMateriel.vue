@@ -207,7 +207,7 @@ export default {
 
 .modal-body {
   margin: 20px 0;
-  height: 80vh;
+  height: 60vh;
   overflow-y: auto;
 }
 
