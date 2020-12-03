@@ -2,7 +2,9 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/admin">Administration</router-link> |
+      <router-link to="/about">A propos</router-link> |
+      <router-link to="/signin">Sign in</router-link>
     </div>
     <router-view />
   </div>
@@ -27,6 +29,9 @@
     &.router-link-exact-active {
       color: #42b983;
     }
+  };
+  a:hover {
+    color: rgba(66, 185, 131,0.6);
   }
 }
 </style>
