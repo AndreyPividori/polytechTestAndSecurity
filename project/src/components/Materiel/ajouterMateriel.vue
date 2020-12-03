@@ -63,7 +63,23 @@
 </template>
 
 <script>
-export default {};
+import firebase from "@/firebase.js";
+
+export default {
+  name: "AjouterMateriel",
+  props: {},
+  data(){
+    return {
+
+    }
+  },
+  methods: {
+
+  },
+  mounted(){
+    console.log(firebase.storage);
+  }
+};
 </script>
 
 <style>
