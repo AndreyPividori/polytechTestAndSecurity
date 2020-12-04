@@ -6,6 +6,9 @@
           <slot name="header">
             <h3 class="title is-4">Ajouter un matériel</h3>
           </slot>
+          <slot name="errors">
+            <div v-if="!isFormNameCorrect" class="error">{{formNameError}}</div>
+          </slot>
         </div>
 
         <div class="modal-body">
@@ -111,23 +114,34 @@ export default {
         version: "",
         tel: "",
         photo: ""
-      }
+      },
+      isFormNameCorrect : true,
+      formNameError : "Erreur : le nom que vous avez renseigné est incorrect."
     };
   },
   methods: {
-    createDoc: async function() {
+    createDoc: function() {
       this.oData.nom = document.getElementById("new-material-name").value;
       this.oData.ref = document.getElementById("new-material-ref").value;
-      this.oData.tel = document.getElementById("new-material-tel").value;
+      this.oData.tel = parseInt(document.getElementById("new-material-tel").value);
       this.oData.version = document.getElementById(
         "new-material-version"
       ).value;
-      console.log(this.oData);
-      await firebase.db
-        .collection("materiel")
-        .doc()
-        .set(this.oData);
-      this.$emit("close");
+
+      let regEx = new RegExp("^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$");
+
+      if (this.oData.nom.length > 1 && this.oData.nom.length < 31 && typeof this.oData.nom === "string") {
+        this.isFormNameCorrect = true
+        console.log(this.oData.nom.match(regEx));
+      }else {
+        this.isFormNameCorrect = false
+      }
+
+      // await firebase.db
+      //   .collection("materiel")
+      //   .doc()
+      //   .set(this.oData);
+      // this.$emit("close");
     },
 
     click1() {
@@ -159,7 +173,6 @@ export default {
           storageRef.snapshot.ref.getDownloadURL().then(url => {
             this.img1 = url;
             this.oData.photo = url;
-            console.log("url : " + this.img1);
           });
         }
       );
@@ -172,6 +185,10 @@ export default {
 </script>
 
 <style>
+.error {
+  background-color: #E12323;
+  color: white;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;
