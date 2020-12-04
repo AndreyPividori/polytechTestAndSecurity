@@ -9,10 +9,9 @@ import vuetify from "./plugins/vuetify.js";
 Vue.use(firestorePlugin);
 require("@/assets/main.scss");
 
-
 Vue.config.productionTip = false;
 
-let app
+let app;
 firebase.auth.onAuthStateChanged(user => {
   if (!app) {
     app = new Vue({
@@ -21,10 +20,10 @@ firebase.auth.onAuthStateChanged(user => {
       firebase,
       vuetify,
       render: h => h(App)
-    }).$mount("#app")
+    }).$mount("#app");
   }
 
   if (user) {
-    store.dispatch('fetchUserProfile', user)
+    store.dispatch("fetchUserProfile", user);
   }
-})
+});

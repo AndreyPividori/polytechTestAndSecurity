@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:#DCDCDC;">
+    <nav
+      class="navbar"
+      role="navigation"
+      aria-label="main navigation"
+      style="background-color:#DCDCDC;"
+    >
       <div class="navbar-brand">
         <img src="./assets/LogoProject.png" width="100" height="25" />
 
@@ -41,7 +46,15 @@
               >
             </div>
             <div v-else class="buttons">
-              <div style="padding-right:1em;"> Bienvenue, <router-link tag="a" to="/profil">{{this.userProfile.forname}} 👤 </router-link></div><button class="navbar-item button is-danger" @click="logout()"> Log Out </button>
+              <div style="padding-right:1em;">
+                Bienvenue,
+                <router-link tag="a" to="/profil"
+                  >{{ this.userProfile.forname }} 👤
+                </router-link>
+              </div>
+              <button class="navbar-item button is-danger" @click="logout()">
+                Log Out
+              </button>
             </div>
           </div>
         </div>
@@ -52,26 +65,24 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex";
 export default {
-  data(){
-    return {
-    }
+  data() {
+    return {};
   },
   computed: {
-    ...mapState(['userProfile']),
+    ...mapState(["userProfile"]),
     showNav() {
-      return !(Object.keys(this.userProfile).length > 1)
+      return !(Object.keys(this.userProfile).length > 1);
     }
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout')
+      this.$store.dispatch("logout");
     }
   },
-  mounted(){
-  }
-}
+  mounted() {}
+};
 </script>
 
 <style lang="scss">

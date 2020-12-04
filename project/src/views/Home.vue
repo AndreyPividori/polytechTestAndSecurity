@@ -30,7 +30,7 @@ export default {
   },
   computed: {},
   methods: {},
-  mounted(){
+  mounted() {
     console.log(this.$store);
   }
 };

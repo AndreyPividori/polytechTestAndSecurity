@@ -1,35 +1,47 @@
 <template>
   <div style="margin-top: 1em;">
-    <h1>Bienvenue, connectez-vous !</h1> <br>
+    <h1>Bienvenue, connectez-vous !</h1>
+    <br />
     <div class="columns">
-        <div class="column has-text-right">
-            <label for="email">Email</label><br>
-            <label for="password1">Password</label> <br>
-        </div>
-        <div class="column has-text-left">
-            <input v-model.trim="loginForm.email" type="text" placeholder="you@email.com" id="email1" /> <br>
-            <input v-model.trim="loginForm.password" type="password" placeholder="******" id="password1" /> <br>
-        </div>
+      <div class="column has-text-right">
+        <label for="email">Email</label><br />
+        <label for="password1">Password</label> <br />
+      </div>
+      <div class="column has-text-left">
+        <input
+          v-model.trim="loginForm.email"
+          type="text"
+          placeholder="you@email.com"
+          id="email1"
+        />
+        <br />
+        <input
+          v-model.trim="loginForm.password"
+          type="password"
+          placeholder="******"
+          id="password1"
+        />
+        <br />
+      </div>
     </div>
     <button @click="login()" class="button">Se connecter</button>
     <div class="extras">
-        Vous n'avez pas de compte ? <a @click="toggleForm()">Créez-en un !</a>
+      Vous n'avez pas de compte ? <a @click="toggleForm()">Créez-en un !</a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       loginForm: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       },
-      showLoginForm: true,
-    }
+      showLoginForm: true
+    };
   },
   methods: {
     toggleForm() {
@@ -38,15 +50,13 @@ export default {
       });
     },
     login() {
-      this.$store.dispatch('login', {
+      this.$store.dispatch("login", {
         email: this.loginForm.email,
         password: this.loginForm.password
-      })
+      });
     }
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

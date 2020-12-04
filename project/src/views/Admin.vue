@@ -1,7 +1,7 @@
 <template>
   <div style="margin-top: 1em;">
     This is an Admin page.
-    {{userProfile}}
+    {{ userProfile }}
   </div>
 </template>
 
@@ -10,8 +10,8 @@ export default {
   data() {
     return {
       userProfile: this.$store.state.userProfile
-    }
-  },
+    };
+  }
 };
 </script>
 
