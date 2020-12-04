@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color:#DCDCDC;">
       <div class="navbar-brand">
-        <img src="./assets/LogoProject.png" width="112" height="28" />
+        <img src="./assets/LogoProject.png" width="100" height="25" />
 
         <a
           role="button"
@@ -83,7 +83,7 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 20px;
 
   a {
     font-weight: bold;
