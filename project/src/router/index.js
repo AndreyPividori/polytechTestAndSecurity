@@ -42,6 +42,15 @@ const routes = [
     }
   },
   {
+    path: "/profil",
+    name: "Profil",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Profil.vue"),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: "/materiel/:id",
     name: "Materiel",
     component: () =>

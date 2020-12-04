@@ -28,6 +28,7 @@
             >Administration</router-link
           >
           <router-link class="navbar-item" to="/about">A propos</router-link>
+          <router-link class="navbar-item" to="/profil">A propos</router-link>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
@@ -40,7 +41,7 @@
               >
             </div>
             <div v-else class="buttons">
-              Bienvenue, {{this.userProfile.forname}} 👤 <button class="navbar-item button is-danger" @click="logout()">Log Out</button>
+              <div style="padding-right:1em;"> Bienvenue, <router-link tag="a" to="/profil">{{this.userProfile.forname}} 👤 </router-link></div><button class="navbar-item button is-danger" @click="logout()"> Log Out </button>
             </div>
           </div>
         </div>
