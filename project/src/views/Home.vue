@@ -31,7 +31,6 @@ export default {
   computed: {},
   methods: {},
   mounted() {
-    console.log(this.$store);
   }
 };
 </script>

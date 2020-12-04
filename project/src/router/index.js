@@ -73,7 +73,6 @@ const router = new VueRouter({
 // navigation guard to check for logged in users
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  console.log(firebase.auth);
   if (requiresAuth && !firebase.auth.currentUser) {
     next("/login");
   } else {
