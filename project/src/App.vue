@@ -40,7 +40,7 @@
               >
             </div>
             <div v-else class="buttons">
-              <button class="navbar-item button is-danger" @click="logout()">Log Out</button>
+              Bienvenue, {{this.userProfile.forname}} 👤 <button class="navbar-item button is-danger" @click="logout()">Log Out</button>
             </div>
           </div>
         </div>
