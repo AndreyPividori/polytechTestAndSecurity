@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 1em;">
     This is an Admin page.
     {{userProfile}}
   </div>

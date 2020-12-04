@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 1em;">
     <h1>Crée ton compte !</h1>
     <div>
       <label for="name">Nom : </label>
@@ -17,7 +17,7 @@
       <label for="password">Password : </label>
       <input v-model.trim="signupForm.password" type="password" placeholder="*******" id="password" />
     </div>
-    <button @click="signup()" class="button">Sign Up</button>
+    <button @click="signup()" class="button">S'inscrire !</button>
     <div class="extras">
         Vous avez déjà un compte ? <a @click="toggleForm()">Connectez vous !</a>
     </div>
