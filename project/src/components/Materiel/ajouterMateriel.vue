@@ -8,6 +8,8 @@
           </slot>
           <slot name="errors">
             <div v-if="!isFormNameCorrect" class="error">{{formNameError}}</div>
+            <div v-if="!isFormRefCorrect" class="error">{{formRefError}}</div>
+            <div v-if="!isFormVersionCorrect" class="error">{{formVersionError}}</div>
           </slot>
         </div>
 
@@ -116,11 +118,15 @@ export default {
         photo: ""
       },
       isFormNameCorrect : true,
-      formNameError : "Erreur : le nom que vous avez renseigné est incorrect."
+      formNameError : "Erreur : le nom que vous avez renseigné est incorrect.",
+      isFormRefCorrect : true,
+      formRefError : "Erreur : la référence que vous avez renseigné est incorrect.",
+      isFormVersionCorrect : true,
+      formVersionError : "Erreur : la version que vous avez renseigné est incorrect.",
     };
   },
   methods: {
-    createDoc: function() {
+    createDoc: async function() {
       this.oData.nom = document.getElementById("new-material-name").value;
       this.oData.ref = document.getElementById("new-material-ref").value;
       this.oData.tel = parseInt(document.getElementById("new-material-tel").value);
@@ -128,20 +134,41 @@ export default {
         "new-material-version"
       ).value;
 
-      let regEx = new RegExp("^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$");
+      let AlphaNumRegEx = new RegExp("^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$");
+      let versionRegEx = new RegExp("[0-9]{3}")
 
-      if (this.oData.nom.length > 1 && this.oData.nom.length < 31 && typeof this.oData.nom === "string") {
+      let aVersions = this.oData.version.match(AlphaNumRegEx);
+      let aNames = this.oData.nom.match(AlphaNumRegEx);
+
+      let aRefs = this.oData.ref.substring(2).match(versionRegEx);
+
+      if (this.oData.nom.length >= 1 && this.oData.nom.length < 31 && typeof this.oData.nom === "string" && aNames != null) {
         this.isFormNameCorrect = true
-        console.log(this.oData.nom.match(regEx));
       }else {
         this.isFormNameCorrect = false
       }
 
-      // await firebase.db
-      //   .collection("materiel")
-      //   .doc()
-      //   .set(this.oData);
-      // this.$emit("close");
+      if (this.oData.version.length >= 3 && this.oData.version.length <= 15 && typeof this.oData.nom === "string" && aVersions != null) {
+        this.isFormVersionCorrect = true
+      }else {
+        this.isFormVersionCorrect = false
+      }
+
+      if ((this.oData.ref.startsWith("AN")|| this.oData.ref.startsWith("AP")) && aRefs[0] != null){
+        this.isFormRefCorrect = true
+      } else {
+        this.isFormRefCorrect = false
+      }
+
+      if (this.isFormNameCorrect && this.isFormRefCorrect && this.isFormVersionCorrect) {
+         await firebase.db
+          .collection("materiel")
+          .doc()
+          .set(this.oData);
+        this.$emit("close");
+      }
+
+     
     },
 
     click1() {
@@ -188,6 +215,7 @@ export default {
 .error {
   background-color: #E12323;
   color: white;
+  border: solid black 1px;
 }
 .modal-mask {
   position: fixed;
