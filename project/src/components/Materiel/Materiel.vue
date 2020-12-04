@@ -29,7 +29,9 @@
         </div>
         <br />
         <div class="has-text-left">
-          <button class="button" @click="isReserving = !isReserving">🗓️Réserver maintenant !🗓️</button>
+          <button class="button" @click="isReserving = !isReserving">
+            🗓️Réserver maintenant !🗓️
+          </button>
         </div>
         <div v-if="isReserving">
           Réservation
