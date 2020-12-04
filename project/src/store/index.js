@@ -48,7 +48,17 @@ const store = new Vuex.Store({
       if (router.currentRoute.path === '/signup') {
         router.push('/login')
       }
-    }
+    },
+    async logout({ commit }) {
+      // log user out
+      await firebase.auth.signOut()
+
+      // clear user data from state
+      commit('setUserProfile', {})
+
+      // redirect to login view
+      router.push('/login')
+    },
   }
 });
 

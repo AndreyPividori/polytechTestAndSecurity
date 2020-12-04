@@ -39,6 +39,9 @@
                 >Log In</router-link
               >
             </div>
+            <div class="buttons">
+              <button class="navbar-item button is-danger" @click="logout()">Log Out</button>
+            </div>
           </div>
         </div>
       </div>
@@ -46,6 +49,22 @@
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  data(){
+    return {
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+    }
+  },
+  mounted(){
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import firebase from "../firebase.js";
 
 Vue.use(VueRouter);
 
@@ -35,7 +36,10 @@ const routes = [
     path: "/admin",
     name: "Administration",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Admin.vue")
+      import(/* webpackChunkName: "about" */ "../views/Admin.vue"),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/materiel/:id",
@@ -44,6 +48,9 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "../components/Materiel/Materiel.vue"
       ),
+    meta: {
+      requiresAuth: true
+    },
     props: true
   }
 ];
@@ -53,5 +60,16 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
+
+// navigation guard to check for logged in users
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
+  console.log(firebase.auth);
+  if (requiresAuth && !firebase.auth.currentUser) {
+    next('/login')
+  } else {
+    next()
+  }
+})
 
 export default router;
