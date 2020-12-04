@@ -18,8 +18,6 @@ const store = new Vuex.Store({
     async login({ dispatch }, form) {
       // sign user in
       const { user } = await firebase.auth.signInWithEmailAndPassword(form.email, form.password)
-      console.log(user);
-      console.log(this.state.userProfile);
       // fetch user profile and set in state
       dispatch('fetchUserProfile', user)
     },
@@ -45,8 +43,8 @@ const store = new Vuex.Store({
       commit('setUserProfile', userProfile.data())
 
       // change route to dashboard
-      if (router.currentRoute.path === '/signup') {
-        router.push('/login')
+      if (router.currentRoute.path === '/login') {
+        router.push('/')
       }
     },
     async logout({ commit }) {
