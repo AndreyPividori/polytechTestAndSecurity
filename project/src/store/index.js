@@ -55,7 +55,7 @@ const store = new Vuex.Store({
       commit('setUserProfile', {})
 
       // redirect to login view
-      router.push('/login')
+      router.push('/')
     },
   }
 });
