@@ -32,11 +32,11 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="buttons">
-              <router-link class="navbar-item button is-primary" to="/signin"
-                >Sign in</router-link
+              <router-link class="navbar-item button is-primary" to="/signup"
+                >Sign Up</router-link
               >
-              <router-link class="navbar-item button is-light" to="/signin"
-                >Log in</router-link
+              <router-link class="navbar-item button is-light" to="/login"
+                >Log In</router-link
               >
             </div>
           </div>

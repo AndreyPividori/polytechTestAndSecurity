@@ -1,23 +1,26 @@
 <template>
   <div>
-    <h1>Get Started</h1>
+    <h1>Crée ton compte !</h1>
     <div>
-      <label for="name">Name</label>
+      <label for="name">Nom : </label>
       <input v-model.trim="signupForm.name" type="text" placeholder="Nom" id="name" />
     </div>
     <div>
-      <label for="forname">Title</label>
+      <label for="forname">Prénom : </label>
       <input v-model.trim="signupForm.forname" type="text" placeholder="Prénom" id="forname" />
     </div>
     <div>
-      <label for="email">Email</label>
+      <label for="email">Email : </label>
       <input v-model.trim="signupForm.email" type="text" placeholder="you@email.com" id="email" />
     </div>
     <div>
-      <label for="password">Password</label>
+      <label for="password">Password : </label>
       <input v-model.trim="signupForm.password" type="password" placeholder="*******" id="password" />
     </div>
     <button @click="signup()" class="button">Sign Up</button>
+    <div class="extras">
+        Vous avez déjà un compte ? <a @click="toggleForm()">Connectez vous !</a>
+    </div>
   </div>
 </template>
 
@@ -38,12 +41,17 @@ export default {
     }
   },
   methods: {
+    toggleForm() {
+      this.$router.push({
+        name: "LogIn"
+      });
+    },
     signup() {
       this.$store.dispatch('signup', {
         email: this.signupForm.email,
         password: this.signupForm.password,
         name: this.signupForm.name,
-        title: this.signupForm.forname
+        forname: this.signupForm.forname
       })
     }
   }

@@ -15,6 +15,14 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    async login({ dispatch }, form) {
+      // sign user in
+      const { user } = await firebase.auth.signInWithEmailAndPassword(form.email, form.password)
+      console.log(user);
+      console.log(this.state.userProfile);
+      // fetch user profile and set in state
+      dispatch('fetchUserProfile', user)
+    },
     async signup({ dispatch }, form) {
       // sign user up
       const { user } = await firebase.auth.createUserWithEmailAndPassword(form.email, form.password)
@@ -22,7 +30,8 @@ const store = new Vuex.Store({
       // create user object in userCollections
       await firebase.db.collection('users').doc(user.uid).set({
         name: form.name,
-        title: form.title
+        forname: form.forname,
+        isAdmin : false
       })
 
       // fetch user profile and set in state
@@ -36,8 +45,8 @@ const store = new Vuex.Store({
       commit('setUserProfile', userProfile.data())
 
       // change route to dashboard
-      if (router.currentRoute.path === '/signin') {
-        router.push('/')
+      if (router.currentRoute.path === '/signup') {
+        router.push('/login')
       }
     }
   }
