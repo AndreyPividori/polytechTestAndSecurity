@@ -29,6 +29,8 @@ export default {
     };
   },
   computed: {},
-  methods: {}
+  methods: {},
+  mounted(){
+  }
 };
 </script>
