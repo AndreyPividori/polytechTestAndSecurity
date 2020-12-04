@@ -31,7 +31,7 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="buttons">
+            <div v-if="showNav" class="buttons">
               <router-link class="navbar-item button is-primary" to="/signup"
                 >Sign Up</router-link
               >
@@ -39,7 +39,7 @@
                 >Log In</router-link
               >
             </div>
-            <div class="buttons">
+            <div v-else class="buttons">
               <button class="navbar-item button is-danger" @click="logout()">Log Out</button>
             </div>
           </div>
@@ -51,9 +51,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   data(){
     return {
+    }
+  },
+  computed: {
+    ...mapState(['userProfile']),
+    showNav() {
+      return !(Object.keys(this.userProfile).length > 1)
     }
   },
   methods: {
