@@ -4,11 +4,13 @@
       <div class="column is-1"></div>
       <listeMateriel class="column is-10" />
       <div class="column is-1">
-        <button id="show-modal" class="button" @click="showModal = true">
+        <div v-if="isUserAdmin()">
+          <button id="myModal" class="button" @click="showModal = true">
           ➕
-        </button>
-        <!-- use the modal component, pass in the prop -->
-        <ajouterMateriel v-if="showModal" @close="showModal = false" />
+          </button>
+          <!-- use the modal component, pass in the prop -->
+          <ajouterMateriel v-if="showModal" @close="showModal = false" />
+        </div>
       </div>
     </div>
   </div>
@@ -25,11 +27,16 @@ export default {
   data() {
     return {
       aMateriel: [],
-      showModal: false
+      showModal: false,
+      userProfile: this.$store.state.userProfile
     };
   },
   computed: {},
-  methods: {},
+  methods: {
+    isUserAdmin() {
+      return ((Object.keys(this.userProfile).length > 1) && this.userProfile.isAdmin);
+    }
+  },
   mounted() {
   }
 };

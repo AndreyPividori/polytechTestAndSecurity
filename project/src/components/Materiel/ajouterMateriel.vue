@@ -2,6 +2,7 @@
   <div class="modal-mask">
     <div class="modal-wrapper">
       <div class="modal-container">
+        <span class="close" @click="close()">&times;</span>
         <div class="modal-header">
           <slot name="header">
             <h3 class="title is-4">Ajouter un matériel</h3>
@@ -228,6 +229,9 @@ export default {
           });
         }
       );
+    },
+    close() {
+      this.$emit("close");
     }
   },
   mounted() {
@@ -296,5 +300,20 @@ export default {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>
