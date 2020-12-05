@@ -6,7 +6,7 @@
     >
       <thead>
         <tr>
-          <th></th>
+          <th v-if="userProfile.isAdmin" style="border: none;"></th>
           <th><abbr title="Position">Index</abbr></th>
           <th>Nom</th>
           <th>Référence</th>
@@ -21,7 +21,7 @@
           :key="index"
           :class="'is-clickable row_' + index"
         >
-          <td id="deletionSpinner" style="vertical-align:middle;">❌</td>
+          <td v-if="userProfile.isAdmin" style="vertical-align:middle;border: none;"><SpinnerDelete/></td>
           <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">
             {{ index + 1 }}
             <span v-if="materiel.available" class="tag is-success"
@@ -54,18 +54,21 @@
 <script>
 import firebase from "@/firebase.js";
 import Loading from "@/components/Utils/Loading";
+import SpinnerDelete from "@/components/Utils/SpinnerDelete";
+import { mapState } from "vuex";
 
 export default {
   name: "ListeMateriel",
   props: {},
-  components: { Loading },
+  components: { Loading,SpinnerDelete },
   data() {
     return {
       aMateriel: [],
       isAllDocumentLoading: false
     };
   },
-  computed: {},
+  computed: {
+    ...mapState(["userProfile"]),},
   methods: {
     getAllDocsFromCollection: function(collection) {
       firebase.db
