@@ -6,7 +6,7 @@
       <div class="column is-1">
         <div v-if="isUserAdmin()">
           <button id="myModal" class="button" @click="showModal = true">
-          ➕
+            ➕
           </button>
           <!-- use the modal component, pass in the prop -->
           <ajouterMateriel v-if="showModal" @close="showModal = false" />
@@ -28,18 +28,19 @@ export default {
   data() {
     return {
       aMateriel: [],
-      showModal: false,
+      showModal: false
     };
   },
   computed: {
-    ...mapState(["userProfile"]),
+    ...mapState(["userProfile"])
   },
   methods: {
     isUserAdmin() {
-      return ((Object.keys(this.userProfile).length > 1) && this.userProfile.isAdmin);
+      return (
+        Object.keys(this.userProfile).length > 1 && this.userProfile.isAdmin
+      );
     }
   },
-  mounted() {
-  }
+  mounted() {}
 };
 </script>

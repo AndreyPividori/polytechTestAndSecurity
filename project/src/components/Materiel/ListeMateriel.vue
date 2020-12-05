@@ -21,19 +21,56 @@
           :key="index"
           :class="'is-clickable row_' + index"
         >
-          <td v-if="userProfile.isAdmin" style="vertical-align:middle;border: none;" @click="deletionVerif()"><SpinnerDelete/></td>
-          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">
+          <td
+            v-if="userProfile.isAdmin"
+            style="vertical-align:middle;border: none;"
+            @click="deletionVerif()"
+          >
+            <SpinnerDelete />
+          </td>
+          <td
+            @click="goToMaterial(materiel.id, materiel)"
+            style="vertical-align:middle;"
+          >
             {{ index + 1 }}
             <span v-if="materiel.available" class="tag is-success"
               >Disponible</span
             >
             <span v-else class="tag is-danger">Indisponible</span>
           </td>
-          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ materiel.nom }}</td>
-          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ materiel.ref }}</td>
-          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ "+33(0) "+materiel.tel }}</td>
-          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ materiel.version.startsWith('V') ? materiel.version : "V" +  materiel.version }}</td>
-          <td @click="goToMaterial(materiel.id, materiel)" class="is-clickable" style="vertical-align:middle;">
+          <td
+            @click="goToMaterial(materiel.id, materiel)"
+            style="vertical-align:middle;"
+          >
+            {{ materiel.nom }}
+          </td>
+          <td
+            @click="goToMaterial(materiel.id, materiel)"
+            style="vertical-align:middle;"
+          >
+            {{ materiel.ref }}
+          </td>
+          <td
+            @click="goToMaterial(materiel.id, materiel)"
+            style="vertical-align:middle;"
+          >
+            {{ "+33(0) " + materiel.tel }}
+          </td>
+          <td
+            @click="goToMaterial(materiel.id, materiel)"
+            style="vertical-align:middle;"
+          >
+            {{
+              materiel.version.startsWith("V")
+                ? materiel.version
+                : "V" + materiel.version
+            }}
+          </td>
+          <td
+            @click="goToMaterial(materiel.id, materiel)"
+            class="is-clickable"
+            style="vertical-align:middle;"
+          >
             <a :href="materiel.photo">
               <v-img
                 :src="materiel.photo"
@@ -60,7 +97,7 @@ import { mapState } from "vuex";
 export default {
   name: "ListeMateriel",
   props: {},
-  components: { Loading,SpinnerDelete },
+  components: { Loading, SpinnerDelete },
   data() {
     return {
       aMateriel: [],
@@ -68,7 +105,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userProfile"]),},
+    ...mapState(["userProfile"])
+  },
   methods: {
     getAllDocsFromCollection: function(collection) {
       firebase.db
@@ -94,13 +132,12 @@ export default {
     }
   },
   mounted() {
-      this.isAllDocumentLoading = true;
-      this.getAllDocsFromCollection("materiel");
-      this.isAllDocumentLoading = false;
+    this.isAllDocumentLoading = true;
+    this.getAllDocsFromCollection("materiel");
+    this.isAllDocumentLoading = false;
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>
+<style scoped lang="scss"></style>
