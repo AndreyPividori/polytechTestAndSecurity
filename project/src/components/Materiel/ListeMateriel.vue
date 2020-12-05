@@ -21,7 +21,7 @@
           :key="index"
           :class="'is-clickable row_' + index"
         >
-          <td v-if="userProfile.isAdmin" style="vertical-align:middle;border: none;"><SpinnerDelete/></td>
+          <td v-if="userProfile.isAdmin" style="vertical-align:middle;border: none;" @click="deletionVerif()"><SpinnerDelete/></td>
           <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">
             {{ index + 1 }}
             <span v-if="materiel.available" class="tag is-success"
@@ -87,6 +87,10 @@ export default {
         name: "Materiel",
         params: { id: keyDoc, oDatas: docDatas }
       });
+    },
+    deletionVerif() {
+      //TODO : Créer un modal demandant confirmation à l'utilisateur
+      //TODO : Si l'utilisateur confirme, supprimer l'id
     }
   },
   mounted() {

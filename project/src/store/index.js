@@ -66,8 +66,10 @@ const store = new Vuex.Store({
       // clear user data from state
       commit("setUserProfile", {});
 
-      // redirect to login view
-      router.push("/");
+      // redirect to Home view
+      if (router.currentRoute.path != "/") {
+        router.push("/");
+      }
     }
   }
 });
