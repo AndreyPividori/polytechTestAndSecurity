@@ -6,6 +6,7 @@
     >
       <thead>
         <tr>
+          <th></th>
           <th><abbr title="Position">Index</abbr></th>
           <th>Nom</th>
           <th>Référence</th>
@@ -19,20 +20,20 @@
           v-for="(materiel, index) in aMateriel"
           :key="index"
           :class="'is-clickable row_' + index"
-          @click="goToMaterial(materiel.id, materiel)"
         >
-          <td>
+          <td id="deletionSpinner" style="vertical-align:middle;">❌</td>
+          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">
             {{ index + 1 }}
             <span v-if="materiel.available" class="tag is-success"
               >Disponible</span
             >
             <span v-else class="tag is-danger">Indisponible</span>
           </td>
-          <td>{{ materiel.nom }}</td>
-          <td>{{ materiel.ref }}</td>
-          <td>{{ "+33(0) "+materiel.tel }}</td>
-          <td>{{ materiel.version.startsWith('V') ? materiel.version : "V" +  materiel.version }}</td>
-          <td class="is-clickable">
+          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ materiel.nom }}</td>
+          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ materiel.ref }}</td>
+          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ "+33(0) "+materiel.tel }}</td>
+          <td @click="goToMaterial(materiel.id, materiel)" style="vertical-align:middle;">{{ materiel.version.startsWith('V') ? materiel.version : "V" +  materiel.version }}</td>
+          <td @click="goToMaterial(materiel.id, materiel)" class="is-clickable" style="vertical-align:middle;">
             <a :href="materiel.photo">
               <v-img
                 :src="materiel.photo"
@@ -87,11 +88,12 @@ export default {
   },
   mounted() {
       this.isAllDocumentLoading = true;
-    this.getAllDocsFromCollection("materiel");
+      this.getAllDocsFromCollection("materiel");
       this.isAllDocumentLoading = false;
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+</style>

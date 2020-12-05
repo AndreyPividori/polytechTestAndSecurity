@@ -20,6 +20,7 @@
 // @ is an alias to /src
 import listeMateriel from "@/components/Materiel/ListeMateriel";
 import ajouterMateriel from "@/components/Materiel/ajouterMateriel";
+import { mapState } from "vuex";
 
 export default {
   name: "Home",
@@ -28,10 +29,11 @@ export default {
     return {
       aMateriel: [],
       showModal: false,
-      userProfile: this.$store.state.userProfile
     };
   },
-  computed: {},
+  computed: {
+    ...mapState(["userProfile"]),
+  },
   methods: {
     isUserAdmin() {
       return ((Object.keys(this.userProfile).length > 1) && this.userProfile.isAdmin);
