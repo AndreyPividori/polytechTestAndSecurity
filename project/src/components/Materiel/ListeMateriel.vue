@@ -30,8 +30,8 @@
           </td>
           <td>{{ materiel.nom }}</td>
           <td>{{ materiel.ref }}</td>
-          <td>{{ materiel.tel }}</td>
-          <td>{{ materiel.version }}</td>
+          <td>{{ "+33(0) "+materiel.tel }}</td>
+          <td>{{ materiel.version.startsWith('V') ? materiel.version : "V" +  materiel.version }}</td>
           <td class="is-clickable">
             <a :href="materiel.photo">
               <v-img
