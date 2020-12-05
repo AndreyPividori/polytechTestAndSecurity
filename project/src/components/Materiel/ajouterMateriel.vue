@@ -231,7 +231,14 @@ export default {
       );
     },
     close() {
-      this.$emit("close");
+      let storageRef = firebase.storage
+        .ref("Photo_Materiel/" + `${this.imageData.name}`)
+      storageRef.delete().then(function(){
+      }).catch(function(err) {
+        console.log(err);
+      })
+
+        this.$emit("close");
     }
   },
   mounted() {
