@@ -61,6 +61,13 @@
       </div>
     </nav>
     <router-view />
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>Projet Test & Sécurité - Polytech Tours</strong>
+        </p>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -108,5 +115,9 @@ export default {
   a:hover {
     color: rgba(66, 185, 131, 0.6);
   }
+}
+
+footer {
+  margin-top: 2em;
 }
 </style>
