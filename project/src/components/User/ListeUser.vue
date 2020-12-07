@@ -1,6 +1,6 @@
 <template>
   <div>
-      <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
          <thead>
         <tr>
           <th><abbr title="Position">Index</abbr></th>
@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user,index) in aUsers" :key="'user_'+index">
+        <tr v-for="(user,index) in aUsers" :key="'user_'+index" @click="goToUser(user.id,user)" class="is-clickable">
           <td>
             {{index + 1}}
           </td>
@@ -66,12 +66,12 @@ export default {
           this.aUsers = tempDoc;
         });
     },
-/*     goToMaterial(keyDoc, docDatas) {
+     goToUser(keyDoc, docDatas) {
       this.$router.push({
         name: "User",
         params: { id: keyDoc, oDatas: docDatas }
       });
-    }, */
+    }, 
     deletionVerif() {
       //TODO : Créer un modal demandant confirmation à l'utilisateur
       //TODO : Si l'utilisateur confirme, supprimer l'id
