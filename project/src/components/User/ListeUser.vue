@@ -17,27 +17,28 @@
         <tr
           v-for="(user, index) in aUsers"
           :key="'user_' + index"
-          @click="goToUser(user.id, user)"
+          
           class="is-clickable"
         >
-          <td>
+          <td @click="goToUser(user.id, user)">
             {{ index + 1 }}
           </td>
-          <td>
+          <td @click="goToUser(user.id, user)">
             {{ user.name }}
           </td>
-          <td>
+          <td @click="goToUser(user.id, user)">
             {{ user.forname }}
           </td>
-          <td>
+          <td @click="goToUser(user.id, user)">
             <span v-if="user.isAdmin">Administrateur</span>
             <span v-else>Utilisateur</span>
           </td>
-          <td>
+          <td @click="goToUser(user.id, user)">
             {{ user.email }}
           </td>
-          <td>
-            {{ user.password }}
+          <td @click="goToUser(user.id, user)" @mouseover="hover = true" @mouseleave="hover = false">
+            <div v-if="hover">{{ user.password }}</div>
+            <div v-else>**************</div>
           </td>
         </tr>
       </tbody>
@@ -55,7 +56,8 @@ export default {
   data() {
     return {
       aUsers: [],
-      isAllDocumentLoading: false
+      isAllDocumentLoading: false,
+      hover: false
     };
   },
   computed: {},
@@ -78,6 +80,9 @@ export default {
         params: { id: keyDoc, oDatas: docDatas }
       });
     },
+    showPW(){
+
+    },
     deletionVerif() {
       //TODO : Créer un modal demandant confirmation à l'utilisateur
       //TODO : Si l'utilisateur confirme, supprimer l'id
@@ -89,4 +94,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>
