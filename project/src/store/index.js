@@ -45,6 +45,11 @@ const store = new Vuex.Store({
 
       // fetch user profile and set in state
       dispatch("fetchUserProfile", user);
+
+      // change route to dashboard
+      if (router.currentRoute.path === "/login") {
+        router.push("/");
+      }
     },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
