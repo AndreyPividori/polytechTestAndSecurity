@@ -127,7 +127,8 @@ export default {
         ref: "",
         version: "",
         tel: "",
-        photo: ""
+        photo: "",
+        available: true
       },
       isFormNameCorrect: true,
       formNameError: "Erreur : le nom que vous avez renseigné est incorrect.",

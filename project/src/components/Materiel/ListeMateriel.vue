@@ -54,7 +54,7 @@
             @click="goToMaterial(materiel.id, materiel)"
             style="vertical-align:middle;"
           >
-            {{ "+33(0) " + materiel.tel }}
+            {{ !isNaN(materiel.tel) ? ("+33(0) " + materiel.tel) : ("Indéfini") }}
           </td>
           <td
             @click="goToMaterial(materiel.id, materiel)"
