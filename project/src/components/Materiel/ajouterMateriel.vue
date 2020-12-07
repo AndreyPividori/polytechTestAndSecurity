@@ -239,7 +239,9 @@ export default {
       );
     },
     close() {
-      let storageRef = firebase.storage.ref(
+
+      if (this.imageData != null) {
+        let storageRef = firebase.storage.ref(
         "Photo_Materiel/" + `${this.imageData.name}`
       );
       storageRef
@@ -248,7 +250,7 @@ export default {
         .catch(function(err) {
           console.log(err);
         });
-
+      }
       this.$emit("close");
     }
   },
