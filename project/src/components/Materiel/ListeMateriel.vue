@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="(materiel, index) in aMateriel"
+          v-for="(materiel, index) in Materiel"
           :key="index"
           :class="'is-clickable row_' + index"
         >
@@ -100,26 +100,13 @@ export default {
   components: { Loading, SpinnerDelete },
   data() {
     return {
-      aMateriel: [],
       isAllDocumentLoading: false
     };
   },
   computed: {
-    ...mapState(["userProfile"])
+    ...mapState(["userProfile","Materiel"])
   },
   methods: {
-    getAllDocsFromCollection: function(collection) {
-      firebase.db
-        .collection(collection)
-        .get()
-        .then(querySnapshot => {
-          console.log(querySnapshot.docs);
-          let tempDoc = querySnapshot.docs.map(doc => {
-            return { id: doc.id, ...doc.data() };
-          });
-          this.aMateriel = tempDoc;
-        });
-    },
     goToMaterial(keyDoc, docDatas) {
       this.$router.push({
         name: "Materiel",
@@ -155,7 +142,7 @@ export default {
   },
   mounted() {
     this.isAllDocumentLoading = true;
-    this.getAllDocsFromCollection("materiel");
+    this.$store.dispatch("getAllDocsFromCollection", "materiel");
     this.isAllDocumentLoading = false;
   }
 };

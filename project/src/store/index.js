@@ -7,11 +7,15 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    userProfile: {}
+    userProfile: {},
+    Materiel: []
   },
   mutations: {
     setUserProfile(state, val) {
       state.userProfile = val;
+    },
+    setMaterialData(state, val) {
+      state.Materiel = val;
     }
   },
   actions: {
@@ -77,6 +81,25 @@ const store = new Vuex.Store({
       if (router.currentRoute.path != "/") {
         router.push("/");
       }
+    },
+    async getAllDocsFromCollection({ commit }, collection){
+      const aMateriel = await firebase.db.collection(collection).get()
+        /*
+        .then(querySnapshot => {
+          const aMateriel = querySnapshot.docs.map(doc => {
+            return { id: doc.id, ...doc.data() };
+            
+          });*/
+          
+
+          console.log(aMateriel);
+          console.log(this.state);
+          commit("setMaterialData", aMateriel.docs.map(d => {
+            return {id: d.id, ...d.data()};
+            })
+          );
+       
+
     }
   }
 });
