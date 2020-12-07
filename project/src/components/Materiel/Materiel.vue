@@ -4,28 +4,28 @@
       <div class="column is-1"></div>
       <div class="column is-4">
         <div>
-          <a :href="oDatas.photo">
-            <v-img :src="oDatas.photo" alt=""> </v-img>
+          <a :href="doc.photo">
+            <v-img :src="doc.photo" alt=""> </v-img>
           </a>
         </div>
       </div>
       <div class="column is-6">
         <div class="has-text-left">
           <strong>Statut : </strong>
-          <span v-if="oDatas.available">Disponible ✅</span>
+          <span v-if="doc.available">Disponible ✅</span>
           <span v-else>Indisponible 🚫</span>
         </div>
         <div class="has-text-left">
           <strong>Téléphone : </strong>
-          <span>{{ oDatas.nom }}</span>
+          <span>{{ doc.nom }}</span>
         </div>
         <div class="has-text-left">
           <strong>Référence : </strong>
-          <span>{{ oDatas.ref }}</span>
+          <span>{{ doc.ref }}</span>
         </div>
         <div class="has-text-left">
           <strong>Commentaire : </strong>
-          <span>{{ oDatas.comment }}</span>
+          <span>{{ doc.comment }}</span>
         </div>
         <br />
         <div class="has-text-left">
@@ -43,27 +43,43 @@
 </template>
 
 <script>
-//import firebase from "@/firebase.js";
+import firebase from "@/firebase.js";
 export default {
   name: "Materiel",
   props: {
     id: {
       type: String,
-      default: ""
+      default: "",
+      required: false
     },
     oDatas: {
       type: Object,
-      required: true
+      required: false
     }
   },
   data() {
     return {
-      isReserving: false
-    };
+      isReserving: false,
+      paramId: (this.id != undefined) ? this.id : this.$route.params.id,
+      doc: ""
+     }
   },
   computed: {},
-  methods: {},
-  mounted() {}
+  methods: {
+    loadDocIfDirectSearch: async function(collection, id) {
+      if(this.oDatas == undefined) {
+        let uniqDoc = firebase.db.collection(collection).doc(id);
+        let dData = await uniqDoc.get()
+        console.log(dData);
+        this.doc = dData.data()
+      }else {
+        this.doc = this.oDatas;
+      }
+    }
+  },
+  mounted() {
+    this.loadDocIfDirectSearch("materiel", this.paramId)
+  }
 };
 </script>
 
