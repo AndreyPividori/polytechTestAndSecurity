@@ -1,7 +1,9 @@
 <template>
   <div>
-      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-         <thead>
+    <table
+      class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+    >
+      <thead>
         <tr>
           <th><abbr title="Position">Index</abbr></th>
           <th>Nom</th>
@@ -12,29 +14,34 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(user,index) in aUsers" :key="'user_'+index" @click="goToUser(user.id,user)" class="is-clickable">
+        <tr
+          v-for="(user, index) in aUsers"
+          :key="'user_' + index"
+          @click="goToUser(user.id, user)"
+          class="is-clickable"
+        >
           <td>
-            {{index + 1}}
+            {{ index + 1 }}
           </td>
           <td>
-            {{user.name}}
+            {{ user.name }}
           </td>
-           <td>
-            {{user.forname}}
+          <td>
+            {{ user.forname }}
           </td>
           <td>
             <span v-if="user.isAdmin">Administrateur</span>
             <span v-else>Utilisateur</span>
           </td>
           <td>
-            {{user.email}}
+            {{ user.email }}
           </td>
           <td>
-            {{user.password}}
+            {{ user.password }}
           </td>
         </tr>
       </tbody>
-      </table>
+    </table>
   </div>
 </template>
 
@@ -44,15 +51,14 @@ import firebase from "@/firebase.js";
 export default {
   name: "ListeUser",
   props: {},
-  components: { },
+  components: {},
   data() {
     return {
       aUsers: [],
       isAllDocumentLoading: false
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     getAllDocsFromCollection: function(collection) {
       firebase.db
@@ -66,12 +72,12 @@ export default {
           this.aUsers = tempDoc;
         });
     },
-     goToUser(keyDoc, docDatas) {
+    goToUser(keyDoc, docDatas) {
       this.$router.push({
         name: "User",
         params: { id: keyDoc, oDatas: docDatas }
       });
-    }, 
+    },
     deletionVerif() {
       //TODO : Créer un modal demandant confirmation à l'utilisateur
       //TODO : Si l'utilisateur confirme, supprimer l'id
@@ -83,6 +89,4 @@ export default {
 };
 </script>
 
-<style>
-
-</style>
+<style></style>

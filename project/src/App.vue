@@ -83,7 +83,9 @@ export default {
       return !(Object.keys(this.userProfile).length > 1);
     },
     showIfAdmin() {
-      return ((Object.keys(this.userProfile).length > 1) &&  this.userProfile.isAdmin);
+      return (
+        Object.keys(this.userProfile).length > 1 && this.userProfile.isAdmin
+      );
     }
   },
   methods: {

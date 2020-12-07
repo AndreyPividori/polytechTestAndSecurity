@@ -16,8 +16,7 @@ export default {
   name: "Admin",
   components: { listeUser },
   data() {
-    return {
-    };
+    return {};
   }
 };
 </script>

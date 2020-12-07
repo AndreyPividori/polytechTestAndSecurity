@@ -1,10 +1,10 @@
 <template>
-  <div>{{id}}</div>
+  <div>{{ id }}</div>
 </template>
 
 <script>
 export default {
-  name:"user",
+  name: "user",
   props: {
     id: {
       type: String,
@@ -15,9 +15,7 @@ export default {
       required: true
     }
   }
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
