@@ -21,7 +21,7 @@
                     placeholder="e.g iPhone 12"
                     id="new-material-name"
                     required
-                    :class="isFormNameCorrect?'':'input is-danger'"
+                    :class="isFormNameCorrect ? '' : 'input is-danger'"
                   />
                   <div v-if="!isFormNameCorrect" class="error">
                     {{ formNameError }}
@@ -50,7 +50,7 @@
                     placeholder="e.g V8.6"
                     id="new-material-version"
                     required
-                    :class="isFormNameCorrect?'':'input is-danger'"
+                    :class="isFormNameCorrect ? '' : 'input is-danger'"
                   />
                   <div v-if="!isFormVersionCorrect" class="error">
                     {{ formVersionError }}
@@ -69,7 +69,9 @@
                     required
                     :class="isFormNameCorrect ? '' : 'input is-danger'"
                   />
-                  <div v-if="!isFormRefCorrect" class="error">{{ formRefError }}</div>
+                  <div v-if="!isFormRefCorrect" class="error">
+                    {{ formRefError }}
+                  </div>
                 </div>
               </div>
 
@@ -92,7 +94,6 @@
               </div>
             </form>
           </slot>
-          
         </div>
 
         <div class="has-text-left is-size-7">* : Champs Obligatoires</div>
@@ -127,7 +128,7 @@ export default {
         ref: "",
         version: "",
         tel: "",
-        image_name : "",
+        image_name: "",
         photo: "",
         available: true
       },
@@ -188,7 +189,6 @@ export default {
         (this.oData.ref.startsWith("AN") || this.oData.ref.startsWith("AP")) &&
         aRefs != null
       ) {
-        
         this.isFormRefCorrect = true;
       } else {
         this.isFormRefCorrect = false;
@@ -204,7 +204,9 @@ export default {
           .doc()
           .set(this.oData);
         this.$emit("close");
-        alert("Nouveau matériel ajouté dans la base, rafraichissez la page :) !");
+        alert(
+          "Nouveau matériel ajouté dans la base, rafraichissez la page :) !"
+        );
       }
     },
 
@@ -243,17 +245,16 @@ export default {
       );
     },
     close() {
-
       if (this.imageData != null) {
         let storageRef = firebase.storage.ref(
-        "Photo_Materiel/" + `${this.imageData.name}`
-      );
-      storageRef
-        .delete()
-        .then(function() {})
-        .catch(function(err) {
-          console.log(err);
-        });
+          "Photo_Materiel/" + `${this.imageData.name}`
+        );
+        storageRef
+          .delete()
+          .then(function() {})
+          .catch(function(err) {
+            console.log(err);
+          });
       }
       this.$emit("close");
     }
@@ -264,7 +265,7 @@ export default {
 
 <style>
 .error {
-  color:red;
+  color: red;
 }
 .modal-mask {
   position: fixed;

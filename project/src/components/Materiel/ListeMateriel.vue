@@ -54,7 +54,7 @@
             @click="goToMaterial(materiel.id, materiel)"
             style="vertical-align:middle;"
           >
-            {{ !isNaN(materiel.tel) ? ("+33(0) " + materiel.tel) : ("Indéfini") }}
+            {{ !isNaN(materiel.tel) ? "+33(0) " + materiel.tel : "Indéfini" }}
           </td>
           <td
             @click="goToMaterial(materiel.id, materiel)"
@@ -126,23 +126,30 @@ export default {
         params: { id: keyDoc, oDatas: docDatas }
       });
     },
-    deletionVerif(keyDoc,keyImage) {
+    deletionVerif(keyDoc, keyImage) {
       if (confirm("Etes-vous sûr de supprimer ce matériel ?")) {
-        this.deleteItem(keyDoc,keyImage)
+        this.deleteItem(keyDoc, keyImage);
       }
     },
-    deleteItem(keyDoc, keyImage){
+    deleteItem(keyDoc, keyImage) {
       let storageRef = firebase.storage.ref("Photo_Materiel/" + keyImage);
-      
-      firebase.db.collection("materiel").doc(keyDoc).delete().then(function() {
-        storageRef
-        .delete().then(function() {
-            alert("Document successfully deleted!");
-            }).catch(function(error) {
-                console.log("Error removing document: ", error);
+
+      firebase.db
+        .collection("materiel")
+        .doc(keyDoc)
+        .delete()
+        .then(function() {
+          storageRef
+            .delete()
+            .then(function() {
+              alert("Document successfully deleted!");
+            })
+            .catch(function(error) {
+              console.log("Error removing document: ", error);
             });
-        }).catch(function(error) {
-            console.log("Error removing document: ", error);
+        })
+        .catch(function(error) {
+          console.log("Error removing document: ", error);
         });
     }
   },

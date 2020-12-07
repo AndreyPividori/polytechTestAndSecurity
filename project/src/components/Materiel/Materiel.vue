@@ -60,25 +60,25 @@ export default {
   data() {
     return {
       isReserving: false,
-      paramId: (this.id != undefined) ? this.id : this.$route.params.id,
+      paramId: this.id != undefined ? this.id : this.$route.params.id,
       doc: ""
-     }
+    };
   },
   computed: {},
   methods: {
     loadDocIfDirectSearch: async function(collection, id) {
-      if(this.oDatas == undefined) {
+      if (this.oDatas == undefined) {
         let uniqDoc = firebase.db.collection(collection).doc(id);
-        let dData = await uniqDoc.get()
+        let dData = await uniqDoc.get();
         console.log(dData);
-        this.doc = dData.data()
-      }else {
+        this.doc = dData.data();
+      } else {
         this.doc = this.oDatas;
       }
     }
   },
   mounted() {
-    this.loadDocIfDirectSearch("materiel", this.paramId)
+    this.loadDocIfDirectSearch("materiel", this.paramId);
   }
 };
 </script>

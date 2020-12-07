@@ -17,7 +17,6 @@
         <tr
           v-for="(user, index) in aUsers"
           :key="'user_' + index"
-          
           class="is-clickable"
         >
           <td @click="goToUser(user.id, user)">
@@ -36,7 +35,11 @@
           <td @click="goToUser(user.id, user)">
             {{ user.email }}
           </td>
-          <td @click="goToUser(user.id, user)" @mouseover="hover = true" @mouseleave="hover = false">
+          <td
+            @click="goToUser(user.id, user)"
+            @mouseover="hover = true"
+            @mouseleave="hover = false"
+          >
             <div v-if="hover">{{ user.password }}</div>
             <div v-else>**************</div>
           </td>
@@ -80,9 +83,7 @@ export default {
         params: { id: keyDoc, oDatas: docDatas }
       });
     },
-    showPW(){
-
-    },
+    showPW() {},
     deletionVerif() {
       //TODO : Créer un modal demandant confirmation à l'utilisateur
       //TODO : Si l'utilisateur confirme, supprimer l'id
@@ -94,5 +95,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
