@@ -67,7 +67,7 @@
                     placeholder="e.g AP12"
                     id="new-material-ref"
                     required
-                    :class="isFormNameCorrect?'':'input is-danger'"
+                    :class="isFormNameCorrect ? '' : 'input is-danger'"
                   />
                   <div v-if="!isFormRefCorrect" class="error">{{ formRefError }}</div>
                 </div>
@@ -184,8 +184,9 @@ export default {
 
       if (
         (this.oData.ref.startsWith("AN") || this.oData.ref.startsWith("AP")) &&
-        aRefs[0] != null
+        aRefs != null
       ) {
+        
         this.isFormRefCorrect = true;
       } else {
         this.isFormRefCorrect = false;
