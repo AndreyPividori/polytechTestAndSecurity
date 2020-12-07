@@ -1,6 +1,40 @@
 <template>
   <div>
-      {{aUsers}}
+      <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+         <thead>
+        <tr>
+          <th><abbr title="Position">Index</abbr></th>
+          <th>Nom</th>
+          <th>Prénom</th>
+          <th>Niveau d'accès</th>
+          <th>Email</th>
+          <th>Mot de passe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(user,index) in aUsers" :key="'user_'+index">
+          <td>
+            {{index + 1}}
+          </td>
+          <td>
+            {{user.name}}
+          </td>
+           <td>
+            {{user.forname}}
+          </td>
+          <td>
+            <span v-if="user.isAdmin">Administrateur</span>
+            <span v-else>Utilisateur</span>
+          </td>
+          <td>
+            {{user.email}}
+          </td>
+          <td>
+            {{user.password}}
+          </td>
+        </tr>
+      </tbody>
+      </table>
   </div>
 </template>
 
