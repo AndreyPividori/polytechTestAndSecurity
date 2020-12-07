@@ -17,7 +17,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="(materiel, index) in Materiel"
+          v-for="(materiel, index) in materiels"
           :key="index"
           :class="'is-clickable row_' + index"
         >
@@ -104,7 +104,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userProfile","Materiel"])
+    ...mapState(["userProfile","materiels"])
   },
   methods: {
     goToMaterial(keyDoc, docDatas) {

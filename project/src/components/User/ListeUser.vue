@@ -15,7 +15,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="(user, index) in aUsers"
+          v-for="(user, index) in users"
           :key="'user_' + index"
           class="is-clickable"
         >
@@ -51,6 +51,7 @@
 
 <script>
 import firebase from "@/firebase.js";
+import { mapState } from "vuex";
 
 export default {
   name: "ListeUser",
@@ -58,25 +59,14 @@ export default {
   components: {},
   data() {
     return {
-      aUsers: [],
       isAllDocumentLoading: false,
       hover: false
     };
   },
-  computed: {},
+  computed: {
+    ...mapState(["users"])
+  },
   methods: {
-    getAllDocsFromCollection: function(collection) {
-      firebase.db
-        .collection(collection)
-        .get()
-        .then(querySnapshot => {
-          console.log(querySnapshot.docs);
-          let tempDoc = querySnapshot.docs.map(doc => {
-            return { id: doc.id, ...doc.data() };
-          });
-          this.aUsers = tempDoc;
-        });
-    },
     goToUser(keyDoc, docDatas) {
       this.$router.push({
         name: "User",
@@ -90,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    this.getAllDocsFromCollection("users");
+    this.$store.dispatch("getAllDocsFromCollection", "users");
   }
 };
 </script>

@@ -8,14 +8,19 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
     userProfile: {},
-    Materiel: []
+    materiels: [],
+    users: []
   },
   mutations: {
     setUserProfile(state, val) {
       state.userProfile = val;
     },
-    setMaterialData(state, val) {
-      state.Materiel = val;
+    setMaterialsData(state, val) {
+      state.materiels = val;
+    },
+    setUsersData(state, val) {
+      console.log('coucou');
+      state.users = val;
     }
   },
   actions: {
@@ -83,23 +88,21 @@ const store = new Vuex.Store({
       }
     },
     async getAllDocsFromCollection({ commit }, collection){
-      const aMateriel = await firebase.db.collection(collection).get()
-        /*
-        .then(querySnapshot => {
-          const aMateriel = querySnapshot.docs.map(doc => {
-            return { id: doc.id, ...doc.data() };
-            
-          });*/
-          
+      const aDocs = await firebase.db.collection(collection).get()
+      if (collection == "materiel") {
+        commit("setMaterialsData", aDocs.docs.map(d => {
+          return {id: d.id, ...d.data()};
+          })
+        );
+      }else if(collection == "users") {
 
-          console.log(aMateriel);
-          console.log(this.state);
-          commit("setMaterialData", aMateriel.docs.map(d => {
-            return {id: d.id, ...d.data()};
-            })
-          );
-       
-
+        commit("setUsersData", aDocs.docs.map(d => {
+          return {id: d.id, ...d.data()};
+          })
+        );
+      }
+      
+      
     }
   }
 });
