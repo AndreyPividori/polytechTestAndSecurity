@@ -19,7 +19,7 @@ const store = new Vuex.Store({
       state.materiels = val;
     },
     setUsersData(state, val) {
-      console.log('coucou');
+      console.log("coucou");
       state.users = val;
     }
   },
@@ -87,22 +87,23 @@ const store = new Vuex.Store({
         router.push("/");
       }
     },
-    async getAllDocsFromCollection({ commit }, collection){
-      const aDocs = await firebase.db.collection(collection).get()
+    async getAllDocsFromCollection({ commit }, collection) {
+      const aDocs = await firebase.db.collection(collection).get();
       if (collection == "materiel") {
-        commit("setMaterialsData", aDocs.docs.map(d => {
-          return {id: d.id, ...d.data()};
+        commit(
+          "setMaterialsData",
+          aDocs.docs.map(d => {
+            return { id: d.id, ...d.data() };
           })
         );
-      }else if(collection == "users") {
-
-        commit("setUsersData", aDocs.docs.map(d => {
-          return {id: d.id, ...d.data()};
+      } else if (collection == "users") {
+        commit(
+          "setUsersData",
+          aDocs.docs.map(d => {
+            return { id: d.id, ...d.data() };
           })
         );
       }
-      
-      
     }
   }
 });

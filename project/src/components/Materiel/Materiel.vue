@@ -9,12 +9,18 @@
           </a>
         </div>
       </div>
-      <div class="column is-6" >
-
+      <div class="column is-6">
         <div class="has-text-right" style="padding-top: 1em;">
-          
-          <button class="button is-small" v-if="!isEditting" @click="isEditting = !isEditting">Edit ✍️</button>
-          <button class="button is-small" v-else @click="SaveChanges()">Save 💾</button>
+          <button
+            class="button is-small"
+            v-if="!isEditting"
+            @click="isEditting = !isEditting"
+          >
+            Edit ✍️
+          </button>
+          <button class="button is-small" v-else @click="SaveChanges()">
+            Save 💾
+          </button>
         </div>
         <div style="padding-top: 5em;">
           <div class="has-text-left">
@@ -43,28 +49,54 @@
           <div v-else>
             <div class="has-text-left">
               <strong>Téléphone : </strong>
-              <input id="input-field-name" class="input is-small" type="text" :value="doc.nom">
+              <input
+                id="input-field-name"
+                class="input is-small"
+                type="text"
+                :value="doc.nom"
+              />
             </div>
             <div class="has-text-left">
               <strong>Référence : </strong>
-              <input id="input-field-ref" class="input is-small" type="text" :value="doc.ref">
+              <input
+                id="input-field-ref"
+                class="input is-small"
+                type="text"
+                :value="doc.ref"
+              />
             </div>
             <div class="has-text-left">
               <strong>Version : </strong>
-              <p><input id="input-field-version" class="input is-small" type="text" :value="doc.version"></p>
+              <p>
+                <input
+                  id="input-field-version"
+                  class="input is-small"
+                  type="text"
+                  :value="doc.version"
+                />
+              </p>
             </div>
             <div class="has-text-left">
               <strong>N° Téléphone : </strong>
-              <input id="input-field-tel" class="input is-small" type="text" :value="doc.tel">
+              <input
+                id="input-field-tel"
+                class="input is-small"
+                type="text"
+                :value="doc.tel"
+              />
             </div>
-          
 
             <div class="has-text-left">
               <strong>Commentaire : </strong>
-              <input id="input-field-comment" class="input is-small" type="text" :value="doc.comment">
+              <input
+                id="input-field-comment"
+                class="input is-small"
+                type="text"
+                :value="doc.comment"
+              />
             </div>
           </div>
-            <br />
+          <br />
           <div class="has-text-left">
             <button class="button" @click="isReserving = !isReserving">
               🗓️Réserver maintenant !🗓️
@@ -74,7 +106,6 @@
             Réservation
           </div>
         </div>
-        
       </div>
       <div class="column is-1"></div>
     </div>
@@ -102,12 +133,12 @@ export default {
       paramId: this.id != undefined ? this.id : this.$route.params.id,
       doc: "",
       isEditting: false,
-      oData:{
-        "ref":"",
-        "version":"",
-        "tel":"",
-        "comment":"",
-        "nom":"",
+      oData: {
+        ref: "",
+        version: "",
+        tel: "",
+        comment: "",
+        nom: ""
       },
       isFormNameCorrect: true,
       formNameError: "Erreur : le nom que vous avez renseigné est incorrect.",
@@ -132,16 +163,13 @@ export default {
       }
     },
     SaveChanges: function() {
-
       this.oData.nom = document.getElementById("input-field-name").value;
       this.oData.comment = document.getElementById("input-field-comment").value;
       this.oData.ref = document.getElementById("input-field-ref").value;
       this.oData.tel = parseInt(
         document.getElementById("input-field-tel").value
       );
-      this.oData.version = document.getElementById(
-        "input-field-version"
-      ).value;
+      this.oData.version = document.getElementById("input-field-version").value;
 
       let AlphaNumRegEx = new RegExp(
         "^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$"
@@ -176,7 +204,9 @@ export default {
       }
 
       if (
-        (this.oData.ref.startsWith("AN") ||this.oData.ref.startsWith("XX") || this.oData.ref.startsWith("AP")) &&
+        (this.oData.ref.startsWith("AN") ||
+          this.oData.ref.startsWith("XX") ||
+          this.oData.ref.startsWith("AP")) &&
         aRefs != null
       ) {
         this.isFormRefCorrect = true;
@@ -194,16 +224,15 @@ export default {
         this.isFormRefCorrect &&
         this.isFormVersionCorrect
       ) {
-
         //let _this = this
-        firebase.db.collection("materiel").doc(this.paramId).update(
-          {
-            "tel":600000000
-          }
-        )
-        
+        firebase.db
+          .collection("materiel")
+          .doc(this.paramId)
+          .update({
+            tel: 600000000
+          });
       }
-      this.isEditting = !this.isEditting
+      this.isEditting = !this.isEditting;
     }
   },
   mounted() {

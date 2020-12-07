@@ -104,7 +104,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["userProfile","materiels"])
+    ...mapState(["userProfile", "materiels"])
   },
   methods: {
     goToMaterial(keyDoc, docDatas) {
