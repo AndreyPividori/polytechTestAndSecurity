@@ -202,6 +202,7 @@ export default {
           .doc()
           .set(this.oData);
         this.$emit("close");
+        alert("Nouveau matériel ajouté dans la base, rafraichissez la page :) !");
       }
     },
 
