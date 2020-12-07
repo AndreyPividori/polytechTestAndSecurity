@@ -33,7 +33,6 @@
             >Administration</router-link
           >
           <router-link class="navbar-item" to="/about">A propos</router-link>
-          <router-link class="navbar-item" to="/profil">A propos</router-link>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
