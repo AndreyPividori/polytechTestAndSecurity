@@ -81,6 +81,9 @@ export default {
     ...mapState(["userProfile"]),
     showNav() {
       return !(Object.keys(this.userProfile).length > 1);
+    },
+    showIfAdmin() {
+      return !((Object.keys(this.userProfile).length > 1) &&  
     }
   },
   methods: {
