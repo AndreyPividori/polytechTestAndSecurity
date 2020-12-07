@@ -29,7 +29,7 @@
       >
         <div class="navbar-start">
           <router-link class="navbar-item" to="/">Home</router-link>
-          <router-link class="navbar-item" to="/admin"
+          <router-link v-if="showIfAdmin" class="navbar-item" to="/admin"
             >Administration</router-link
           >
           <router-link class="navbar-item" to="/about">A propos</router-link>
@@ -83,7 +83,7 @@ export default {
       return !(Object.keys(this.userProfile).length > 1);
     },
     showIfAdmin() {
-      return !((Object.keys(this.userProfile).length > 1) &&  
+      return ((Object.keys(this.userProfile).length > 1) &&  this.userProfile.isAdmin);
     }
   },
   methods: {
