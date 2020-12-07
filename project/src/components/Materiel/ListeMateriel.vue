@@ -24,7 +24,7 @@
           <td
             v-if="userProfile.isAdmin"
             style="vertical-align:middle;border: none;"
-            @click="deletionVerif()"
+            @click="deletionVerif(materiel.id, materiel.image_name)"
           >
             <SpinnerDelete />
           </td>
@@ -126,9 +126,24 @@ export default {
         params: { id: keyDoc, oDatas: docDatas }
       });
     },
-    deletionVerif() {
-      //TODO : Créer un modal demandant confirmation à l'utilisateur
-      //TODO : Si l'utilisateur confirme, supprimer l'id
+    deletionVerif(keyDoc,keyImage) {
+      if (confirm("Etes-vous sûr de supprimer ce matériel ?")) {
+        this.deleteItem(keyDoc,keyImage)
+      }
+    },
+    deleteItem(keyDoc, keyImage){
+      let storageRef = firebase.storage.ref("Photo_Materiel/" + keyImage);
+      
+      firebase.db.collection("materiel").doc(keyDoc).delete().then(function() {
+        storageRef
+        .delete().then(function() {
+            alert("Document successfully deleted!");
+            }).catch(function(error) {
+                console.log("Error removing document: ", error);
+            });
+        }).catch(function(error) {
+            console.log("Error removing document: ", error);
+        });
     }
   },
   mounted() {

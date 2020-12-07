@@ -127,6 +127,7 @@ export default {
         ref: "",
         version: "",
         tel: "",
+        image_name : "",
         photo: "",
         available: true
       },
@@ -219,6 +220,7 @@ export default {
     },
     onUpload() {
       this.img1 = null;
+      this.oData.image_name = this.imageData.name;
       let storageRef = firebase.storage
         .ref("Photo_Materiel/" + `${this.imageData.name}`)
         .put(this.imageData);
