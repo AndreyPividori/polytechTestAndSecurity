@@ -7,29 +7,25 @@
           <slot name="header">
             <h3 class="title is-4">Ajouter un matériel</h3>
           </slot>
-          <slot name="errors">
-            <div v-if="!isFormNameCorrect" class="error">
-              {{ formNameError }}
-            </div>
-            <div v-if="!isFormRefCorrect" class="error">{{ formRefError }}</div>
-            <div v-if="!isFormVersionCorrect" class="error">
-              {{ formVersionError }}
-            </div>
-          </slot>
         </div>
 
         <div class="modal-body">
           <slot name="body">
             <form action="">
               <div class="field has-text-left">
-                <label class="label">Nom :</label>
+                <label class="label">Nom* :</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="e.g iPhone 12"
                     id="new-material-name"
+                    required
+                    :class="isFormNameCorrect?'':'input is-danger'"
                   />
+                  <div v-if="!isFormNameCorrect" class="error">
+                    {{ formNameError }}
+                  </div>
                 </div>
               </div>
 
@@ -46,26 +42,34 @@
               </div>
 
               <div class="field has-text-left">
-                <label class="label">Version :</label>
+                <label class="label">Version* :</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="e.g V8.6"
                     id="new-material-version"
+                    required
+                    :class="isFormNameCorrect?'':'input is-danger'"
                   />
+                  <div v-if="!isFormVersionCorrect" class="error">
+                    {{ formVersionError }}
+                  </div>
                 </div>
               </div>
 
               <div class="field has-text-left">
-                <label class="label">Référence :</label>
+                <label class="label">Référence* :</label>
                 <div class="control">
                   <input
                     class="input"
                     type="text"
                     placeholder="e.g AP12"
                     id="new-material-ref"
+                    required
+                    :class="isFormNameCorrect?'':'input is-danger'"
                   />
+                  <div v-if="!isFormRefCorrect" class="error">{{ formRefError }}</div>
                 </div>
               </div>
 
@@ -88,7 +92,10 @@
               </div>
             </form>
           </slot>
+          
         </div>
+
+        <div class="has-text-left is-size-7">* : Champs Obligatoires</div>
 
         <div class="modal-footer">
           <slot name="footer">
@@ -250,9 +257,7 @@ export default {
 
 <style>
 .error {
-  background-color: #e12323;
-  color: white;
-  border: solid black 1px;
+  color:red;
 }
 .modal-mask {
   position: fixed;
