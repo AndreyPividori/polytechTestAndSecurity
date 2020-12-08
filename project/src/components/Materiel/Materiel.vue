@@ -54,7 +54,11 @@
                 class="input is-small"
                 type="text"
                 :value="doc.nom"
+                :class="isFormNameCorrect ? '':'is-danger'"
               />
+              <div v-if="!isFormNameCorrect" class="error">
+                {{ formNameError }}
+              </div>
             </div>
             <div class="has-text-left">
               <strong>Référence : </strong>
@@ -63,18 +67,21 @@
                 class="input is-small"
                 type="text"
                 :value="doc.ref"
+                :class="isFormRefCorrect ? '':'is-danger'"
               />
             </div>
             <div class="has-text-left">
               <strong>Version : </strong>
-              <p>
                 <input
                   id="input-field-version"
                   class="input is-small"
                   type="text"
                   :value="doc.version"
+                  :class="isFormVersionCorrect ? '':'is-danger'"
                 />
-              </p>
+                <div v-if="!isFormVersionCorrect" class="error">
+                  {{ formVersionError }}
+                </div>
             </div>
             <div class="has-text-left">
               <strong>N° Téléphone : </strong>
@@ -114,6 +121,7 @@
 
 <script>
 import firebase from "@/firebase.js";
+
 export default {
   name: "Materiel",
   props: {
@@ -134,11 +142,11 @@ export default {
       doc: "",
       isEditting: false,
       oData: {
-        ref: "",
-        version: "",
-        tel: "",
-        comment: "",
-        nom: ""
+        "ref": "",
+        "version": "",
+        "tel": "",
+        "comment": "",
+        "nom": ""
       },
       isFormNameCorrect: true,
       formNameError: "Erreur : le nom que vous avez renseigné est incorrect.",
@@ -161,6 +169,11 @@ export default {
       } else {
         this.doc = this.oDatas;
       }
+    },
+    loadMateriel: async function(){
+      let uniqDoc = firebase.db.collection("materiel").doc(this.$route.params.id);
+      let dData = await uniqDoc.get();
+      this.doc = dData.data();
     },
     SaveChanges: function() {
       this.oData.nom = document.getElementById("input-field-name").value;
@@ -213,24 +226,22 @@ export default {
       } else {
         this.isFormRefCorrect = false;
       }
-
-      console.log(this.isFormNameCorrect);
-      console.log(this.isFormRefCorrect);
-      console.log(this.isFormVersionCorrect);
-      console.log(this.oDatas);
-      console.log(this.paramId);
       if (
         this.isFormNameCorrect &&
         this.isFormRefCorrect &&
         this.isFormVersionCorrect
       ) {
-        //let _this = this
         firebase.db
           .collection("materiel")
           .doc(this.paramId)
           .update({
-            tel: 600000000
+            nom: document.getElementById("input-field-name").value,
+            tel: parseInt(document.getElementById("input-field-tel").value),
+            ref: document.getElementById("input-field-ref").value,
+            version: document.getElementById("input-field-version").value,
+            comment: document.getElementById("input-field-comment").value
           });
+          this.loadMateriel();
       }
       this.isEditting = !this.isEditting;
     }
