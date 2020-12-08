@@ -56,7 +56,7 @@ const store = new Vuex.Store({
       dispatch("fetchUserProfile", user);
 
       // change route to dashboard
-      if (router.currentRoute.path === "/login") {
+      if (router.currentRoute.path != "/") {
         router.push("/");
       }
     },

@@ -16,12 +16,12 @@
                 <label class="label">Nom* :</label>
                 <div class="control">
                   <input
-                    class="input"
                     type="text"
                     placeholder="e.g iPhone 12"
                     id="new-material-name"
                     required
-                    :class="isFormNameCorrect ? '' : 'input is-danger'"
+                    class="input"
+                    :class="isFormNameCorrect ? '' : 'is-danger'"
                   />
                   <div v-if="!isFormNameCorrect" class="error">
                     {{ formNameError }}
@@ -50,7 +50,7 @@
                     placeholder="e.g V8.6"
                     id="new-material-version"
                     required
-                    :class="isFormNameCorrect ? '' : 'input is-danger'"
+                    :class="isFormVersionCorrect ? '' : 'is-danger'"
                   />
                   <div v-if="!isFormVersionCorrect" class="error">
                     {{ formVersionError }}
@@ -67,7 +67,7 @@
                     placeholder="e.g AP12"
                     id="new-material-ref"
                     required
-                    :class="isFormNameCorrect ? '' : 'input is-danger'"
+                    :class="isFormRefCorrect ? '' : 'is-danger'"
                   />
                   <div v-if="!isFormRefCorrect" class="error">
                     {{ formRefError }}
