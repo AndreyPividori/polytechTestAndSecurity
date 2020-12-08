@@ -1,6 +1,6 @@
 <template>
   <div style="margin-top: 1em;">
-    <h1>Bienvenue, connectez-vous !</h1>
+    <h1 class="title is-4">Bienvenue, connecte-toi !</h1>
     <br />
     <div class="columns">
       <div class="column has-text-right">
