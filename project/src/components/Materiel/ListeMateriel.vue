@@ -138,6 +138,8 @@ export default {
         .catch(function(error) {
           console.log("Error removing document: ", error);
         });
+
+      this.$store.dispatch("getAllDocsFromCollection", "materiel");
     }
   },
   mounted() {
