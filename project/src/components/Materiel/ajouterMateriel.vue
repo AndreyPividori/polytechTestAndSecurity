@@ -205,9 +205,7 @@ export default {
           .set(this.oData);
         this.$emit("close");
         this.$store.dispatch("getAllDocsFromCollection", "materiel");
-        alert(
-          "Nouveau matériel ajouté dans la base !"
-        );
+        alert("Nouveau matériel ajouté dans la base !");
       }
     },
 

@@ -54,7 +54,7 @@
                 class="input is-small"
                 type="text"
                 :value="doc.nom"
-                :class="isFormNameCorrect ? '':'is-danger'"
+                :class="isFormNameCorrect ? '' : 'is-danger'"
               />
               <div v-if="!isFormNameCorrect" class="error">
                 {{ formNameError }}
@@ -67,21 +67,21 @@
                 class="input is-small"
                 type="text"
                 :value="doc.ref"
-                :class="isFormRefCorrect ? '':'is-danger'"
+                :class="isFormRefCorrect ? '' : 'is-danger'"
               />
             </div>
             <div class="has-text-left">
               <strong>Version : </strong>
-                <input
-                  id="input-field-version"
-                  class="input is-small"
-                  type="text"
-                  :value="doc.version"
-                  :class="isFormVersionCorrect ? '':'is-danger'"
-                />
-                <div v-if="!isFormVersionCorrect" class="error">
-                  {{ formVersionError }}
-                </div>
+              <input
+                id="input-field-version"
+                class="input is-small"
+                type="text"
+                :value="doc.version"
+                :class="isFormVersionCorrect ? '' : 'is-danger'"
+              />
+              <div v-if="!isFormVersionCorrect" class="error">
+                {{ formVersionError }}
+              </div>
             </div>
             <div class="has-text-left">
               <strong>N° Téléphone : </strong>
@@ -142,11 +142,11 @@ export default {
       doc: "",
       isEditting: false,
       oData: {
-        "ref": "",
-        "version": "",
-        "tel": "",
-        "comment": "",
-        "nom": ""
+        ref: "",
+        version: "",
+        tel: "",
+        comment: "",
+        nom: ""
       },
       isFormNameCorrect: true,
       formNameError: "Erreur : le nom que vous avez renseigné est incorrect.",
@@ -170,8 +170,10 @@ export default {
         this.doc = this.oDatas;
       }
     },
-    loadMateriel: async function(){
-      let uniqDoc = firebase.db.collection("materiel").doc(this.$route.params.id);
+    loadMateriel: async function() {
+      let uniqDoc = firebase.db
+        .collection("materiel")
+        .doc(this.$route.params.id);
       let dData = await uniqDoc.get();
       this.doc = dData.data();
     },
@@ -241,7 +243,7 @@ export default {
             version: document.getElementById("input-field-version").value,
             comment: document.getElementById("input-field-comment").value
           });
-          this.loadMateriel();
+        this.loadMateriel();
       }
       this.isEditting = !this.isEditting;
     }
