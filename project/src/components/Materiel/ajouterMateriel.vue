@@ -204,8 +204,9 @@ export default {
           .doc()
           .set(this.oData);
         this.$emit("close");
+        this.$store.dispatch("getAllDocsFromCollection", "materiel");
         alert(
-          "Nouveau matériel ajouté dans la base, rafraichissez la page :) !"
+          "Nouveau matériel ajouté dans la base !"
         );
       }
     },
