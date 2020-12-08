@@ -101,14 +101,14 @@ export default {
         this.isPassWordComplete = true
       }
 
-      // if (this.isNameComplete && this.isForNameComplete && this.isEmailComplete && this.isPassWordComplete) {
-      //   this.$store.dispatch("signup", {
-      //     email: this.signupForm.email,
-      //     password: this.signupForm.password,
-      //     name: this.signupForm.name,
-      //     forname: this.signupForm.forname
-      //   }); 
-      // }
+      if (this.isNameComplete && this.isForNameComplete && this.isEmailComplete && this.isPassWordComplete) {
+        this.$store.dispatch("signup", {
+          email: this.signupForm.email,
+          password: this.signupForm.password,
+          name: this.signupForm.name,
+          forname: this.signupForm.forname
+        }); 
+      }
     }
   }
 };
