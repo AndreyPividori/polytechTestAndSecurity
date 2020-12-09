@@ -2,11 +2,12 @@
   <div>
     <div class="columns">
       <div class="column is-1"></div>
-      <div class="column is-4">
+      <div class="column is-4" :style="doc.photo == '' ? 'border: 1px solid black; ' :'' ">
         <div>
-          <a :href="doc.photo">
+          <a v-if="doc.photo != ''" :href="doc.photo">
             <v-img :src="doc.photo" alt=""> </v-img>
           </a>
+          <div v-else >Pas d'image</div>
         </div>
       </div>
       <div class="column is-6">
