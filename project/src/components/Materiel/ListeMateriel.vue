@@ -71,7 +71,8 @@
             class="is-clickable"
             style="vertical-align:middle;"
           >
-            <a :href="materiel.photo">
+
+            <a v-if="materiel.photo != ''" :href="materiel.photo">
               <v-img
                 :src="materiel.photo"
                 alt=""
@@ -81,6 +82,7 @@
               >
               </v-img>
             </a>
+            <span v-else>Pas d'image.</span>
           </td>
         </tr>
       </tbody>
