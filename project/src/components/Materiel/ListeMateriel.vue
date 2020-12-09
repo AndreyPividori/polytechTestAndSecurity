@@ -119,8 +119,8 @@ export default {
       }
     },
     deleteItem(keyDoc, keyImage) {
-      let storageRef = firebase.storage.ref("Photo_Materiel/" + keyImage);
-
+      if(keyImage != "") {
+        let storageRef = firebase.storage.ref("Photo_Materiel/" + keyImage);
       firebase.db
         .collection("materiel")
         .doc(keyDoc)
@@ -138,6 +138,10 @@ export default {
         .catch(function(error) {
           console.log("Error removing document: ", error);
         });
+      } else {
+        firebase.db.collection("materiel").doc(keyDoc).delete()
+      }
+
 
       this.$store.dispatch("getAllDocsFromCollection", "materiel");
     }
