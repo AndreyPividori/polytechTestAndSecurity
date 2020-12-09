@@ -19,7 +19,6 @@ const store = new Vuex.Store({
       state.materiels = val;
     },
     setUsersData(state, val) {
-      console.log("coucou");
       state.users = val;
     }
   },

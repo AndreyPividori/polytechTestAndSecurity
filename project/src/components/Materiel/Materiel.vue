@@ -168,7 +168,6 @@ export default {
       if (this.oDatas == undefined) {
         let uniqDoc = firebase.db.collection(collection).doc(id);
         let dData = await uniqDoc.get();
-        console.log(dData);
         this.doc = dData.data();
       } else {
         this.doc = this.oDatas;
@@ -221,9 +220,6 @@ export default {
       } else {
         this.isFormVersionCorrect = false;
       }
-      console.log(aVersions);
-      console.log(aRefs);
-      console.log(aRefs != null);
 
       if (
         (this.oData.ref.startsWith("AN") ||
