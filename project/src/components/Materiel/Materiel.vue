@@ -2,12 +2,15 @@
   <div>
     <div class="columns">
       <div class="column is-1"></div>
-      <div class="column is-4" :style="doc.photo == '' ? 'border: 1px solid black; ' :'' ">
+      <div
+        class="column is-4"
+        :style="doc.photo == '' ? 'border: 1px solid black; ' : ''"
+      >
         <div>
           <a v-if="doc.photo != ''" :href="doc.photo">
             <v-img :src="doc.photo" alt=""> </v-img>
           </a>
-          <div v-else >Pas d'image</div>
+          <div v-else>Pas d'image</div>
         </div>
       </div>
       <div class="column is-6">
@@ -93,7 +96,7 @@
                 id="input-field-tel"
                 class="input is-small"
                 type="text"
-                :value="'0'+doc.tel"
+                :value="'0' + doc.tel"
               />
             </div>
 
@@ -196,7 +199,7 @@ export default {
 
       let aVersions = this.oData.version.match(AlphaNumRegEx);
       let aNames = this.oData.nom.match(AlphaNumRegEx);
-      let sRef =this.oData.ref.substring(2)
+      let sRef = this.oData.ref.substring(2);
       let aRefs = sRef.match(versionRegEx);
 
       if (
@@ -225,7 +228,7 @@ export default {
         (this.oData.ref.startsWith("AN") ||
           this.oData.ref.startsWith("XX") ||
           this.oData.ref.startsWith("AP")) &&
-          aRefs[0] == sRef
+        aRefs[0] == sRef
       ) {
         this.isFormRefCorrect = true;
       } else {
@@ -247,7 +250,7 @@ export default {
             comment: document.getElementById("input-field-comment").value
           });
         this.loadMateriel();
-      this.isEditting = !this.isEditting;
+        this.isEditting = !this.isEditting;
       }
     }
   },

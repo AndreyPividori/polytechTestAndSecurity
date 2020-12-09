@@ -71,7 +71,6 @@
             class="is-clickable"
             style="vertical-align:middle;"
           >
-
             <a v-if="materiel.photo != ''" :href="materiel.photo">
               <v-img
                 :src="materiel.photo"
@@ -121,29 +120,31 @@ export default {
       }
     },
     deleteItem(keyDoc, keyImage) {
-      if(keyImage != "") {
+      if (keyImage != "") {
         let storageRef = firebase.storage.ref("Photo_Materiel/" + keyImage);
-      firebase.db
-        .collection("materiel")
-        .doc(keyDoc)
-        .delete()
-        .then(function() {
-          storageRef
-            .delete()
-            .then(function() {
-              alert("Document successfully deleted!");
-            })
-            .catch(function(error) {
-              console.log("Error removing document: ", error);
-            });
-        })
-        .catch(function(error) {
-          console.log("Error removing document: ", error);
-        });
+        firebase.db
+          .collection("materiel")
+          .doc(keyDoc)
+          .delete()
+          .then(function() {
+            storageRef
+              .delete()
+              .then(function() {
+                alert("Document successfully deleted!");
+              })
+              .catch(function(error) {
+                console.log("Error removing document: ", error);
+              });
+          })
+          .catch(function(error) {
+            console.log("Error removing document: ", error);
+          });
       } else {
-        firebase.db.collection("materiel").doc(keyDoc).delete()
+        firebase.db
+          .collection("materiel")
+          .doc(keyDoc)
+          .delete();
       }
-
 
       this.$store.dispatch("getAllDocsFromCollection", "materiel");
     }
