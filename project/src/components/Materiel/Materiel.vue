@@ -43,7 +43,7 @@
             </div>
             <div class="has-text-left">
               <strong>N° Téléphone : </strong>
-              <span>{{ doc.tel }}</span>
+              <span>+33 (0){{ doc.tel }}</span>
             </div>
           </div>
           <div v-else>
@@ -69,6 +69,9 @@
                 :value="doc.ref"
                 :class="isFormRefCorrect ? '' : 'is-danger'"
               />
+              <div v-if="!isFormRefCorrect" class="error">
+                {{ formRefError }}
+              </div>
             </div>
             <div class="has-text-left">
               <strong>Version : </strong>
@@ -89,7 +92,7 @@
                 id="input-field-tel"
                 class="input is-small"
                 type="text"
-                :value="doc.tel"
+                :value="'0'+doc.tel"
               />
             </div>
 
@@ -193,8 +196,8 @@ export default {
 
       let aVersions = this.oData.version.match(AlphaNumRegEx);
       let aNames = this.oData.nom.match(AlphaNumRegEx);
-
-      let aRefs = this.oData.ref.substring(2).match(versionRegEx);
+      let sRef =this.oData.ref.substring(2)
+      let aRefs = sRef.match(versionRegEx);
 
       if (
         this.oData.nom.length >= 1 &&
@@ -217,12 +220,15 @@ export default {
       } else {
         this.isFormVersionCorrect = false;
       }
+      console.log(aVersions);
+      console.log(aRefs);
+      console.log(aRefs != null);
 
       if (
         (this.oData.ref.startsWith("AN") ||
           this.oData.ref.startsWith("XX") ||
           this.oData.ref.startsWith("AP")) &&
-        aRefs != null
+          aRefs[0] == sRef
       ) {
         this.isFormRefCorrect = true;
       } else {
@@ -244,8 +250,8 @@ export default {
             comment: document.getElementById("input-field-comment").value
           });
         this.loadMateriel();
-      }
       this.isEditting = !this.isEditting;
+      }
     }
   },
   mounted() {
