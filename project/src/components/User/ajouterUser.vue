@@ -22,6 +22,7 @@
                     id="new-user-name"
                     required
                     class="input"
+                    :class="isNameCorrect ? '' : 'is-danger'"
                   />
                 </div>
               </div>
@@ -35,6 +36,7 @@
                     type="text"
                     placeholder="Thomas"
                     id="new-user-forname"
+                  :class="isForNameCorrect ? '' : 'is-danger'"
                   />
                 </div>
               </div>
@@ -48,6 +50,7 @@
                     type="integer"
                     placeholder="e.g 30033"
                     id="new-user-matricule"
+                  :class="isMatriculeCorrect ? '' : 'is-danger'"
                   />
                 </div>
               </div>
@@ -71,16 +74,6 @@
                   />
                   <label for="Emprunteur">Emprunteur</label>
                   <br />
-
-                  <!-- <input
-                    v-model.trim="signupForm.role"
-                        class="input"
-                        type="radio"
-                        placeholder="e.g Administrateur"
-                        id="new-user-matricule"
-                    />
-                    <label for="Admin" id="label-admin">Administrateur</label>
-                    <label for="Other">Emprunteur</label> -->
                 </div>
               </div>
 
@@ -132,6 +125,7 @@
 </template>
 
 <script>
+import firebase from "@/firebase.js";
 export default {
   name: "ajouterUser",
   data() {
@@ -144,40 +138,54 @@ export default {
         email: "",
         password: ""
       },
-      isNameComplete: true,
-      isForNameComplete: true,
-      isEmailComplete: true,
-      isPassWordComplete: true
+      isNameCorrect: true,
+      isForNameCorrect: true,
+      isEmailCorrect: true,
+      isMatriculeCorrect: true,
+      isPassWordCorrect: true,
     };
   },
   methods: {
     close() {
       this.$emit("close");
     },
-    addUser() {
-      let adminPW = this.$store.state.userProfile.password;
-      let adminEdmail = this.$store.state.userProfile.email;
-
-      this.$store.dispatch("logout");
+    async addUser() {
+      let dDoc = null
       let _this = this;
 
-      this.$store
-        .dispatch("signup", {
-          email: this.signupForm.email,
-          password: this.signupForm.password,
-          matricule: this.signupForm.matricule,
-          role: this.signupForm.role,
-          name: this.signupForm.name,
-          forname: this.signupForm.forname
-        })
-        .then(function() {
-          _this.relogAsAdmin(adminEdmail, adminPW);
+      //TODO Checker si les champs sont bien remplis
+
+      firebase.db.collection("users").where("email", "==", this.signupForm.email).get().then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            dDoc = doc.id, " => ", doc.data()
         });
+        if (dDoc === null) {
+          let adminPW = _this.$store.state.userProfile.password;
+          let adminEdmail = _this.$store.state.userProfile.email;
+
+          _this.$store.dispatch("logout");
+          
+          _this.$store
+            .dispatch("signup", {
+              email: _this.signupForm.email,
+              password: _this.signupForm.password,
+              matricule: _this.signupForm.matricule,
+              role: _this.signupForm.role,
+              name: _this.signupForm.name,
+              forname: _this.signupForm.forname
+            })
+            .then(function() {
+              _this.relogAsAdmin(adminEdmail, adminPW);
+            });
+        }else {
+          alert("Email déjà existant !")
+        }
+      })      
     },
     relogAsAdmin(email, pw) {
       this.$store.dispatch("logout");
 
-      console.log("Logout Passé");
       this.$store.dispatch("login", {
         email: email,
         password: pw
