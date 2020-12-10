@@ -21,11 +21,11 @@
           class="is-clickable"
         >
           <td
-              style="vertical-align:middle;border: none;"
-              @click="deleteUser(user)"
-            >
-              <SpinnerDelete />
-            </td>
+            style="vertical-align:middle;border: none;"
+            @click="deleteUser(user)"
+          >
+            <SpinnerDelete />
+          </td>
           <td @click="goToUser(user.id, user)">
             {{ index + 1 }}
           </td>
@@ -64,7 +64,7 @@ import { mapState } from "vuex";
 export default {
   name: "ListeUser",
   props: {},
-  components: {SpinnerDelete},
+  components: { SpinnerDelete },
   data() {
     return {
       isAllDocumentLoading: false,
@@ -83,9 +83,12 @@ export default {
     },
     showPW() {},
     deleteUser(user) {
-      firebase.db.collection("users").doc(user.id).delete()
+      firebase.db
+        .collection("users")
+        .doc(user.id)
+        .delete();
       this.$store.dispatch("getAllDocsFromCollection", "users");
-    },
+    }
   },
   mounted() {
     this.$store.dispatch("getAllDocsFromCollection", "users");

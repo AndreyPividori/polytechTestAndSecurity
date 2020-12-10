@@ -155,7 +155,6 @@ export default {
       this.$emit("close");
     },
     addUser() {
-      
       let adminPW = this.$store.state.userProfile.password;
       let adminEdmail = this.$store.state.userProfile.email;
 
@@ -172,7 +171,7 @@ export default {
           forname: this.signupForm.forname
         })
         .then(function() {
-            _this.relogAsAdmin(adminEdmail, adminPW);
+          _this.relogAsAdmin(adminEdmail, adminPW);
         });
     },
     relogAsAdmin(email, pw) {
