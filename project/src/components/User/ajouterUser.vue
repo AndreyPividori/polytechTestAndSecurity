@@ -120,7 +120,7 @@
         <div class="modal-footer">
           <slot name="footer">
             <div class="control">
-              <button class="button is-primary" @click="signup()">
+              <button class="button is-primary" @click="addUser()">
                 Submit
               </button>
             </div>
@@ -132,7 +132,6 @@
 </template>
 
 <script>
-import firebase from "@/firebase.js";
 export default {
   name: "ajouterUser",
   data() {
@@ -155,26 +154,28 @@ export default {
     close() {
       this.$emit("close");
     },
-    signup() {
-        console.log(this.$store.state.userProfile);
-        let adminPW = this.$store.state.userProfile.password
-        let adminEdmail = this.$store.state.userProfile.email
+    addUser() {
+      console.log(this.$store.state.userProfile);
+      let adminPW = this.$store.state.userProfile.password;
+      let adminEdmail = this.$store.state.userProfile.email;
 
-        this.$store.dispatch("logout");
-        let _this = this
+      this.$store.dispatch("logout");
+      let _this = this;
 
-        this.$store.dispatch("signup", {
-          email :this.signupForm.email,
-          password : this.signupForm.password,
-          matricule : this.signupForm.matricule,
-          role : this.signupForm.role,
-          name : this.signupForm.name,
-          forname : this.signupForm.forname
-        }).then(function () {
-          if (confirm("Etes vous sur ?")) {
-           _this.relogAsAdmin(adminEdmail, adminPW)
-          }
+      this.$store
+        .dispatch("signup", {
+          email: this.signupForm.email,
+          password: this.signupForm.password,
+          matricule: this.signupForm.matricule,
+          role: this.signupForm.role,
+          name: this.signupForm.name,
+          forname: this.signupForm.forname
         })
+        .then(function() {
+          if (confirm("Etes vous sur ?")) {
+            _this.relogAsAdmin(adminEdmail, adminPW);
+          }
+        });
     },
     relogAsAdmin(email, pw) {
       this.$store.dispatch("logout");

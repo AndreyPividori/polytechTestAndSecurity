@@ -21,7 +21,7 @@ import listeUser from "@/components/User/ListeUser";
 import ajouterUser from "@/components/User/ajouterUser";
 export default {
   name: "Admin",
-  components: { listeUser,ajouterUser },
+  components: { listeUser, ajouterUser },
   data() {
     return {
       showModal: false
