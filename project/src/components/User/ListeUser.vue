@@ -21,11 +21,10 @@
           class="is-clickable"
         >
           <td
-            
             style="vertical-align:middle;border: none;"
             @click="deleteUser(user)"
           >
-            <SpinnerDelete v-if="userProfile.email != user.email"/>
+            <SpinnerDelete v-if="userProfile.email != user.email" />
           </td>
           <td @click="goToUser(user.id, user)">
             {{ index + 1 }}
@@ -73,7 +72,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["users","userProfile"])
+    ...mapState(["users", "userProfile"])
   },
   methods: {
     goToUser(keyDoc, docDatas) {
