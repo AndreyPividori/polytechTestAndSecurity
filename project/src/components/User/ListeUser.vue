@@ -5,6 +5,7 @@
     >
       <thead>
         <tr>
+          <th style="border: none;"></th>
           <th><abbr title="Position">Index</abbr></th>
           <th>Nom</th>
           <th>Prénom</th>
@@ -19,6 +20,12 @@
           :key="'user_' + index"
           class="is-clickable"
         >
+          <td
+              style="vertical-align:middle;border: none;"
+              @click="deleteUser(user)"
+            >
+              <SpinnerDelete />
+            </td>
           <td @click="goToUser(user.id, user)">
             {{ index + 1 }}
           </td>
@@ -50,12 +57,14 @@
 </template>
 
 <script>
+import firebase from "@/firebase.js";
+import SpinnerDelete from "@/components/Utils/SpinnerDelete";
 import { mapState } from "vuex";
 
 export default {
   name: "ListeUser",
   props: {},
-  components: {},
+  components: {SpinnerDelete},
   data() {
     return {
       isAllDocumentLoading: false,
@@ -73,10 +82,10 @@ export default {
       });
     },
     showPW() {},
-    deletionVerif() {
-      //TODO : Créer un modal demandant confirmation à l'utilisateur
-      //TODO : Si l'utilisateur confirme, supprimer l'id
-    }
+    deleteUser(user) {
+      firebase.db.collection("users").doc(user.id).delete()
+      this.$store.dispatch("getAllDocsFromCollection", "users");
+    },
   },
   mounted() {
     this.$store.dispatch("getAllDocsFromCollection", "users");
