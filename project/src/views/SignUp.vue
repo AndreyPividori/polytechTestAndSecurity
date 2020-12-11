@@ -1,5 +1,6 @@
 <template>
   <div style="margin-top: 1em;">
+    Cette page sera supprimée après que tous les membres du projet aient créer leur compte
     <h1 class="title is-4">Crée ton compte !</h1>
 
     <label for="name">Nom* : </label>

@@ -37,7 +37,9 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div v-if="showNav" class="buttons">
-              <router-link class="navbar-item button is-light" to="/login"
+              <router-link class="navbar-item button is-primary" to="/signup"
+                >Sign Up</router-link
+              ><router-link class="navbar-item button is-light" to="/login"
                 >Log In</router-link
               >
             </div>

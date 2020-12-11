@@ -1,7 +1,7 @@
 <template>
   <div class="modal-mask">
     <div class="modal-wrapper">
-      <div class="modal-container">
+      <div v-if="!isLoading" class="modal-container">
         <span class="close" @click="close()">&times;</span>
         <div class="modal-header">
           <slot name="header">
@@ -142,14 +142,21 @@
           </slot>
         </div>
       </div>
+
+      <div v-else class="modal-container">
+        <Loading />
+
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import Loading from "@/components/Utils/Loading";
 import firebase from "@/firebase.js";
 export default {
   name: "ajouterUser",
+  components: {Loading},
   data() {
     return {
       signupForm: {
@@ -160,6 +167,7 @@ export default {
         email: "",
         password: ""
       },
+      isLoading: false,
       isNameCorrect: true,
       nameError:
         "Le nom choisi doit comprendre entre 1 et 30 caractères alphanumériques.",
@@ -242,6 +250,7 @@ export default {
             (dDoc = doc.id), " => ", doc.data();
           });
           if (dDoc === null) {
+            _this.isLoading = true
             let adminPW = _this.$store.state.userProfile.password;
             let adminEdmail = _this.$store.state.userProfile.email;
 
@@ -257,12 +266,17 @@ export default {
                 forname: _this.signupForm.forname
               })
               .then(function() {
-                _this.relogAsAdmin(adminEdmail, adminPW);
+                _this.relogAsAdmin(adminEdmail, adminPW)
+                _this.$store.dispatch("getAllDocsFromCollection","users").then(function () {
+                  setTimeout(() => {  _this.isLoading = false;_this.close(); }, 500);
+                  
+                })
               });
           } else {
             alert("Email déjà existant !");
           }
         });
+
     },
     relogAsAdmin(email, pw) {
       this.$store.dispatch("logout");
@@ -271,6 +285,7 @@ export default {
         email: email,
         password: pw
       });
+
     },
     ValidateEmail(email) {
       //RFC 2822 standard email validation
@@ -282,6 +297,9 @@ export default {
 </script>
 
 <style>
+.modal-wrapper {
+  background-color: rgba(214, 214, 214, 0.9);
+}
 .error {
   color: red;
 }

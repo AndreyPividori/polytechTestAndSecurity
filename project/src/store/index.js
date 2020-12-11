@@ -57,9 +57,9 @@ const store = new Vuex.Store({
       dispatch("fetchUserProfile", user);
 
       // change route to dashboard
-      if (router.currentRoute.path != "/") {
-        router.push("/");
-      }
+      // if (router.currentRoute.path != "/") {
+      //   router.push("/");
+      // }
     },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
@@ -72,9 +72,9 @@ const store = new Vuex.Store({
       commit("setUserProfile", userProfile.data());
 
       // change route to dashboard
-      if (router.currentRoute.path === "/login") {
-        router.push("/");
-      }
+      // if (router.currentRoute.path === "/login") {
+      //   router.push("/");
+      // }
     },
     async logout({ commit }) {
       // log user out
@@ -84,9 +84,9 @@ const store = new Vuex.Store({
       commit("setUserProfile", {});
 
       // redirect to Home view
-      if (router.currentRoute.path != "/") {
-        router.push("/");
-      }
+      // if (router.currentRoute.path != "/") {
+      //   router.push("/");
+      // }
     },
     async getAllDocsFromCollection({ commit }, collection) {
       const aDocs = await firebase.db.collection(collection).get();
