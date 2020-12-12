@@ -83,12 +83,13 @@ export default {
     },
     showPW() {},
     deleteUser(user) {
+
       firebase.db
         .collection("users")
         .doc(user.id)
         .delete();
       this.$store.dispatch("getAllDocsFromCollection", "users");
-    }
+    },
   },
   mounted() {
     this.$store.dispatch("getAllDocsFromCollection", "users");

@@ -25,9 +25,9 @@
       </div>
     </div>
     <button @click="login()" class="button">Se connecter</button>
-    <div class="extras">
+    <!-- <div class="extras">
       Vous n'avez pas de compte ? <a @click="toggleForm()">Créez-en un !</a>
-    </div>
+    </div> -->
   </div>
 </template>
 
