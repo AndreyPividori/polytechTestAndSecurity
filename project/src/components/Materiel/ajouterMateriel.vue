@@ -62,12 +62,16 @@
                 <label class="label" for="marque">Référence* :</label>
                 <div class="field">
                   <div class="control">
-                    <select name="reference" id="ref-select" class="select is-info">
+                    <select
+                      name="reference"
+                      id="ref-select"
+                      class="select is-info"
+                    >
                       <option value="">--Sélectionnez une référence--</option>
                       <option value="apple">Apple</option>
                       <option value="android">Android</option>
                       <option value="other">Autre</option>
-                  </select>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -143,48 +147,46 @@ export default {
   methods: {
     createDoc: async function() {
       let sRef = document.getElementById("ref-select").value;
-      let sChoice
+      let sChoice;
 
-      if(sRef == "android"){
-        sChoice = "AN"
-      }else if (sRef == "apple"){
-        sChoice = "AP"
-      }else {
-        sChoice = "XX"
+      if (sRef == "android") {
+        sChoice = "AN";
+      } else if (sRef == "apple") {
+        sChoice = "AP";
+      } else {
+        sChoice = "XX";
       }
 
-      let aRefs = []
-
+      let aRefs = [];
 
       this.materiels.forEach(m => {
-        if(m.ref.startsWith(sChoice)){
-            aRefs.push(parseInt(m.ref.substring(2)))
+        if (m.ref.startsWith(sChoice)) {
+          aRefs.push(parseInt(m.ref.substring(2)));
         }
       });
 
-      let sNewRef
+      let sNewRef;
 
       if (aRefs.length > 0) {
-        let iMaxRef = Math.max(...aRefs)
-        let iNewRef = iMaxRef+ 1
-        let sNewRefNumber = iNewRef.toString()
-        
-        if(sNewRefNumber.length > 2) {
-          sNewRef = sChoice + sNewRefNumber
-        }else {
-          if(sNewRefNumber.length == 1) {
-            sNewRef = sChoice + "00" +sNewRefNumber
-          }else {
-            sNewRef = sChoice + "0" +sNewRefNumber
-          } 
+        let iMaxRef = Math.max(...aRefs);
+        let iNewRef = iMaxRef + 1;
+        let sNewRefNumber = iNewRef.toString();
+
+        if (sNewRefNumber.length > 2) {
+          sNewRef = sChoice + sNewRefNumber;
+        } else {
+          if (sNewRefNumber.length == 1) {
+            sNewRef = sChoice + "00" + sNewRefNumber;
+          } else {
+            sNewRef = sChoice + "0" + sNewRefNumber;
+          }
         }
-      }else {
-        sNewRef = sChoice + "000"
+      } else {
+        sNewRef = sChoice + "000";
       }
 
-
       this.oData.nom = document.getElementById("new-material-name").value;
-      this.oData.ref = sNewRef
+      this.oData.ref = sNewRef;
       this.oData.tel = parseInt(
         document.getElementById("new-material-tel").value
       );
@@ -222,10 +224,7 @@ export default {
         this.isFormVersionCorrect = false;
       }
 
-      if (
-        this.isFormNameCorrect &&
-        this.isFormVersionCorrect
-      ) {
+      if (this.isFormNameCorrect && this.isFormVersionCorrect) {
         await firebase.db
           .collection("materiel")
           .doc()
