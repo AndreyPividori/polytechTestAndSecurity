@@ -25,9 +25,9 @@
       </div>
     </div>
     <button @click="login()" class="button">Se connecter</button>
-    <div class="extras">
+    <!-- <div class="extras">
       Vous n'avez pas de compte ? <a @click="toggleForm()">Créez-en un !</a>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -50,10 +50,19 @@ export default {
       });
     },
     login() {
-      this.$store.dispatch("login", {
-        email: this.loginForm.email,
-        password: this.loginForm.password
-      });
+      let _this = this;
+      this.$store
+        .dispatch("login", {
+          email: this.loginForm.email,
+          password: this.loginForm.password
+        })
+        .then(function() {
+          _this.$router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert("Nom de compte ou mot de passe incorrect");
+        });
     }
   }
 };
