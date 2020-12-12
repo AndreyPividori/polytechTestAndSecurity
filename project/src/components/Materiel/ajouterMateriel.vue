@@ -59,18 +59,15 @@
               </div>
 
               <div class="field has-text-left">
-                <label class="label">Référence* :</label>
-                <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    placeholder="e.g AP12"
-                    id="new-material-ref"
-                    required
-                    :class="isFormRefCorrect ? '' : 'is-danger'"
-                  />
-                  <div v-if="!isFormRefCorrect" class="error">
-                    {{ formRefError }}
+                <label class="label" for="marque">Référence* :</label>
+                <div class="field">
+                  <div class="control">
+                    <select name="reference" id="ref-select" class="select is-info">
+                      <option value="">--Sélectionnez une référence--</option>
+                      <option value="apple">Apple</option>
+                      <option value="android">Android</option>
+                      <option value="other">Autre</option>
+                  </select>
                   </div>
                 </div>
               </div>
@@ -114,6 +111,7 @@
 
 <script>
 import firebase from "@/firebase.js";
+import { mapState } from "vuex";
 
 export default {
   name: "AjouterMateriel",
@@ -125,8 +123,8 @@ export default {
       imageData: null,
       oData: {
         nom: "",
-        ref: "",
         version: "",
+        ref: "",
         tel: "",
         image_name: "",
         photo: "",
@@ -134,18 +132,59 @@ export default {
       },
       isFormNameCorrect: true,
       formNameError: "Erreur : le nom que vous avez renseigné est incorrect.",
-      isFormRefCorrect: true,
-      formRefError:
-        "Erreur : la référence que vous avez renseigné est incorrect.",
       isFormVersionCorrect: true,
       formVersionError:
         "Erreur : la version que vous avez renseigné est incorrect."
     };
   },
+  computed: {
+    ...mapState(["materiels"])
+  },
   methods: {
     createDoc: async function() {
+      let sRef = document.getElementById("ref-select").value;
+      let sChoice
+
+      if(sRef == "android"){
+        sChoice = "AN"
+      }else if (sRef == "apple"){
+        sChoice = "AP"
+      }else {
+        sChoice = "XX"
+      }
+
+      let aRefs = []
+
+
+      this.materiels.forEach(m => {
+        if(m.ref.startsWith(sChoice)){
+            aRefs.push(parseInt(m.ref.substring(2)))
+        }
+      });
+
+      let sNewRef
+
+      if (aRefs.length > 0) {
+        let iMaxRef = Math.max(...aRefs)
+        let iNewRef = iMaxRef+ 1
+        let sNewRefNumber = iNewRef.toString()
+        
+        if(sNewRefNumber.length > 2) {
+          sNewRef = sChoice + sNewRefNumber
+        }else {
+          if(sNewRefNumber.length == 1) {
+            sNewRef = sChoice + "00" +sNewRefNumber
+          }else {
+            sNewRef = sChoice + "0" +sNewRefNumber
+          } 
+        }
+      }else {
+        sNewRef = sChoice + "000"
+      }
+
+
       this.oData.nom = document.getElementById("new-material-name").value;
-      this.oData.ref = document.getElementById("new-material-ref").value;
+      this.oData.ref = sNewRef
       this.oData.tel = parseInt(
         document.getElementById("new-material-tel").value
       );
@@ -160,8 +199,6 @@ export default {
 
       let aVersions = this.oData.version.match(AlphaNumRegEx);
       let aNames = this.oData.nom.match(AlphaNumRegEx);
-
-      let aRefs = this.oData.ref.substring(2).match(versionRegEx);
 
       if (
         this.oData.nom.length >= 1 &&
@@ -186,17 +223,7 @@ export default {
       }
 
       if (
-        (this.oData.ref.startsWith("AN") || this.oData.ref.startsWith("AP")) &&
-        aRefs != null
-      ) {
-        this.isFormRefCorrect = true;
-      } else {
-        this.isFormRefCorrect = false;
-      }
-
-      if (
         this.isFormNameCorrect &&
-        this.isFormRefCorrect &&
         this.isFormVersionCorrect
       ) {
         await firebase.db
