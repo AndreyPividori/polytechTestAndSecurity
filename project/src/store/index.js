@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import firebase from "../firebase.js";
-import router from "../router/index.js";
 
 Vue.use(Vuex);
 
@@ -55,11 +54,6 @@ const store = new Vuex.Store({
 
       // fetch user profile and set in state
       dispatch("fetchUserProfile", user);
-
-      // change route to dashboard
-      // if (router.currentRoute.path != "/") {
-      //   router.push("/");
-      // }
     },
     async fetchUserProfile({ commit }, user) {
       // fetch user profile
@@ -70,11 +64,6 @@ const store = new Vuex.Store({
 
       // set user profile in state
       commit("setUserProfile", userProfile.data());
-
-      // change route to dashboard
-      // if (router.currentRoute.path === "/login") {
-      //   router.push("/");
-      // }
     },
     async logout({ commit }) {
       // log user out
@@ -82,11 +71,6 @@ const store = new Vuex.Store({
 
       // clear user data from state
       commit("setUserProfile", {});
-
-      // redirect to Home view
-      // if (router.currentRoute.path != "/") {
-      //   router.push("/");
-      // }
     },
     async getAllDocsFromCollection({ commit }, collection) {
       const aDocs = await firebase.db.collection(collection).get();

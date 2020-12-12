@@ -145,7 +145,6 @@
 
       <div v-else class="modal-container">
         <Loading />
-
       </div>
     </div>
   </div>
@@ -156,7 +155,7 @@ import Loading from "@/components/Utils/Loading";
 import firebase from "@/firebase.js";
 export default {
   name: "ajouterUser",
-  components: {Loading},
+  components: { Loading },
   data() {
     return {
       signupForm: {
@@ -250,7 +249,7 @@ export default {
             (dDoc = doc.id), " => ", doc.data();
           });
           if (dDoc === null) {
-            _this.isLoading = true
+            _this.isLoading = true;
             let adminPW = _this.$store.state.userProfile.password;
             let adminEdmail = _this.$store.state.userProfile.email;
 
@@ -266,17 +265,20 @@ export default {
                 forname: _this.signupForm.forname
               })
               .then(function() {
-                _this.relogAsAdmin(adminEdmail, adminPW)
-                _this.$store.dispatch("getAllDocsFromCollection","users").then(function () {
-                  setTimeout(() => {  _this.isLoading = false;_this.close(); }, 500);
-                  
-                })
+                _this.relogAsAdmin(adminEdmail, adminPW);
+                _this.$store
+                  .dispatch("getAllDocsFromCollection", "users")
+                  .then(function() {
+                    setTimeout(() => {
+                      _this.isLoading = false;
+                      _this.close();
+                    }, 500);
+                  });
               });
           } else {
             alert("Email déjà existant !");
           }
         });
-
     },
     relogAsAdmin(email, pw) {
       this.$store.dispatch("logout");
@@ -285,7 +287,6 @@ export default {
         email: email,
         password: pw
       });
-
     },
     ValidateEmail(email) {
       //RFC 2822 standard email validation

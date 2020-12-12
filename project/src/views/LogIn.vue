@@ -50,16 +50,19 @@ export default {
       });
     },
     login() {
-      let _this = this
-      this.$store.dispatch("login", {
-        email: this.loginForm.email,
-        password: this.loginForm.password
-      }).then(function() {
-        _this.$router.push("/")
-      }).catch(function(error) {
-        alert("Nom de compte ou mot de passe incorrect");
-      })
-
+      let _this = this;
+      this.$store
+        .dispatch("login", {
+          email: this.loginForm.email,
+          password: this.loginForm.password
+        })
+        .then(function() {
+          _this.$router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error);
+          alert("Nom de compte ou mot de passe incorrect");
+        });
     }
   }
 };

@@ -36,7 +36,8 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <div v-if="showNav" class="buttons"><router-link class="navbar-item button is-light" to="/login"
+            <div v-if="showNav" class="buttons">
+              <router-link class="navbar-item button is-light" to="/login"
                 >Log In</router-link
               >
             </div>
@@ -86,7 +87,7 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch("logout");
-      this.$router.push("/login")
+      this.$router.push("/login");
     }
   },
   mounted() {}
