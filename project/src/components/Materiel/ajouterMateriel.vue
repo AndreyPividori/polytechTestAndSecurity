@@ -197,7 +197,6 @@ export default {
       let AlphaNumRegEx = new RegExp(
         "^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$"
       );
-      let versionRegEx = new RegExp("[0-9]{3}");
 
       let aVersions = this.oData.version.match(AlphaNumRegEx);
       let aNames = this.oData.nom.match(AlphaNumRegEx);
