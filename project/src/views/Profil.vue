@@ -45,7 +45,9 @@
       </div>
       <div class="column is-1"></div>
     </div>
-    <button class="button is-danger" @click="verifDeletion()">Supprimer le compte</button>
+    <button class="button is-danger" @click="verifDeletion()">
+      Supprimer le compte
+    </button>
   </div>
 </template>
 
@@ -58,21 +60,27 @@ export default {
   data() {
     return {
       dUser: "",
-      isEditting: false,
+      isEditting: false
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     getUser: async function() {
       let userId = firebase.auth.currentUser;
-      let userDatas = await firebase.db.collection("users").doc(userId.uid).get()
+      let userDatas = await firebase.db
+        .collection("users")
+        .doc(userId.uid)
+        .get();
 
       this.dUser = userDatas.data();
     },
-    verifDeletion(){
-      if(confirm("Etes-vous sur de supprimer votre compte ? \nCette action est irreversible.")){
-        this.deleteAccount()
+    verifDeletion() {
+      if (
+        confirm(
+          "Etes-vous sur de supprimer votre compte ? \nCette action est irreversible."
+        )
+      ) {
+        this.deleteAccount();
       }
     },
     deleteAccount() {
@@ -101,7 +109,7 @@ export default {
     }
   },
   mounted() {
-    this.getUser()
+    this.getUser();
   }
 };
 </script>

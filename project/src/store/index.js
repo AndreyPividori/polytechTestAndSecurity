@@ -48,7 +48,7 @@ const store = new Vuex.Store({
           isAdmin: form.role,
           email: form.email,
           password: form.password,
-          matricule: form.matricule,
+          matricule: form.matricule
         });
 
       // fetch user profile and set in state
