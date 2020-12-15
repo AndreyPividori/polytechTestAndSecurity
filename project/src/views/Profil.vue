@@ -1,11 +1,14 @@
 <template>
   <div>
-    <h1 class="title">Mon profil </h1>
+    <h1 class="title">Mon profil</h1>
     <div class="columns">
       <div class="column is-1"></div>
       <div class="column is-4">
-        <div ><span style="font-size: 15em;"> 👤</span><br><span>Pas d'image enregistrée.</span></div>
-        
+        <div>
+          <span style="font-size: 15em;"> 👤</span><br /><span
+            >Pas d'image enregistrée.</span
+          >
+        </div>
       </div>
       <div class="column is-6">
         <div class="has-text-right" style="padding-top: 1em;">
@@ -54,7 +57,7 @@
                 :class="isFormNameCorrect ? '' : 'is-danger'"
               />
               <div v-if="!isFormNameCorrect" class="error">
-                    {{ formNameError }}
+                {{ formNameError }}
               </div>
             </div>
             <div class="has-text-left">
@@ -67,7 +70,7 @@
                 :class="isFormFornameCorrect ? '' : 'is-danger'"
               />
               <div v-if="!isFormFornameCorrect" class="error">
-                    {{ formFornameError }}
+                {{ formFornameError }}
               </div>
             </div>
             <div class="has-text-left">
@@ -84,7 +87,7 @@
                 :class="isFormMatriculeCorrect ? '' : 'is-danger'"
               />
               <div v-if="!isFormMatriculeCorrect" class="error">
-                    {{ formMatriculeError }}
+                {{ formMatriculeError }}
               </div>
             </div>
             <div class="has-text-left">
@@ -123,8 +126,7 @@ export default {
         "Erreur : la version que vous avez renseigné est incorrect."
     };
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     getUser: async function() {
       let userId = firebase.auth.currentUser;
@@ -182,21 +184,13 @@ export default {
       let aForNames = sForname.match(AlphaNumRegEx);
       let aMatricules = sMatricule.match(AlphaNumRegEx);
 
-      if (
-        sName.length > 0 &&
-        sName.length < 31 &&
-        aNames != null
-      ) {
+      if (sName.length > 0 && sName.length < 31 && aNames != null) {
         this.isFormNameCorrect = true;
       } else {
         this.isFormNameCorrect = false;
       }
 
-      if (
-        sForname.length > 0 &&
-        sForname.length < 31 &&
-        aForNames != null
-      ) {
+      if (sForname.length > 0 && sForname.length < 31 && aForNames != null) {
         this.isFormFornameCorrect = true;
       } else {
         this.isFormFornameCorrect = false;
@@ -212,19 +206,22 @@ export default {
         this.isFormMatriculeCorrect = false;
       }
 
-      if(this.isFormNameCorrect && this.isFormFornameCorrect && this.isFormMatriculeCorrect) {
+      if (
+        this.isFormNameCorrect &&
+        this.isFormFornameCorrect &&
+        this.isFormMatriculeCorrect
+      ) {
         firebase.db
-            .collection("users")
-            .doc(userUid)
-            .update({
-              name: document.getElementById("input-field-name").value,
-              forname: document.getElementById("input-field-forname").value,
-              matricule: document.getElementById("input-field-matricule").value,
-            });
+          .collection("users")
+          .doc(userUid)
+          .update({
+            name: document.getElementById("input-field-name").value,
+            forname: document.getElementById("input-field-forname").value,
+            matricule: document.getElementById("input-field-matricule").value
+          });
         this.getUser();
-        this.isEditting = !this.isEditting
+        this.isEditting = !this.isEditting;
       }
-
     }
   },
   mounted() {
