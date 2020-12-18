@@ -316,7 +316,6 @@ export default {
     },
     confirmDate() {
       this.loadMateriel();
-      let FormatedPeriod = this.dates.join("~");
       let isPossible = true;
       this.doc.reservedDates.forEach(element => {
         let SplittedDates = element.split("~");
