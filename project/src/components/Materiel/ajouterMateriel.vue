@@ -193,6 +193,7 @@ export default {
       this.oData.version = document.getElementById(
         "new-material-version"
       ).value;
+      this.oData.reservedDates = [];
 
       let AlphaNumRegEx = new RegExp(
         "^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$"

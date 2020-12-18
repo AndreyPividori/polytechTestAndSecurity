@@ -117,7 +117,32 @@
             </button>
           </div>
           <div v-if="isReserving">
-            Réservation
+            <v-row>
+              <v-text-field
+                v-model="dateRangeText"
+                color="blue"
+                label=" Sélectionner une période d'emprunt sur un laps de temps défini. Merci de votre compréhension. Thomas et Quentin"
+                prepend-icon="mdi-calendar"
+                readonly
+              ></v-text-field>
+            </v-row>
+            <v-row>
+              <v-date-picker
+                v-model="dates"
+                color="blue"
+                header-color="green lighten-1"
+                range
+                :allowed-dates="allowedDates"
+                class="mt-4"
+                min="2020-12-01"
+                max="2021-02-01"
+              ></v-date-picker>
+            </v-row>
+            <v-row>
+              <button class="button" id="B_Valid" @click="confirmDate()">
+                Valider
+              </button>
+            </v-row>
           </div>
         </div>
       </div>
@@ -128,6 +153,7 @@
 
 <script>
 import firebase from "@/firebase.js";
+import moment from "moment";
 
 export default {
   name: "Materiel",
@@ -144,6 +170,8 @@ export default {
   },
   data() {
     return {
+      dates: [],
+      aDates: ["2020-12-20"],
       isReserving: false,
       paramId: this.id != undefined ? this.id : this.$route.params.id,
       doc: "",
@@ -165,8 +193,41 @@ export default {
         "Erreur : la version que vous avez renseigné est incorrect."
     };
   },
-  computed: {},
+  computed: {
+    dateRangeText() {
+      let dateToReturn = "";
+      if (this.dates[0] != "" && this.dates[1] != "")
+        dateToReturn = this.dates.join(" au ");
+      return dateToReturn;
+    }
+  },
   methods: {
+    // https://stackoverflow.com/questions/50488703/vuetify-js-datepicker-provide-array-of-allowed-dates
+    allowedDates: function(val) {
+      let alreadySelected = false;
+      this.doc.reservedDates.forEach(element => {
+        let SplittedDates = element.split("~");
+        if (
+          moment(val).isBetween(
+            SplittedDates[0],
+            SplittedDates[1],
+            undefined,
+            "[]"
+          )
+        )
+          alreadySelected = true;
+      });
+      //date avant ajd en gris
+      //val>ajd
+      if (!alreadySelected) {
+        let today = new Date().toISOString().slice(0, 10);
+        if (moment(val).isBefore(today)) {
+          alreadySelected = true;
+        }
+      }
+      if (alreadySelected) return 0;
+      else return -1;
+    },
     loadDocIfDirectSearch: async function(collection, id) {
       if (this.oDatas == undefined) {
         let uniqDoc = firebase.db.collection(collection).doc(id);
@@ -252,6 +313,60 @@ export default {
         this.loadMateriel();
         this.isEditting = !this.isEditting;
       }
+    },
+    confirmDate() {
+      this.loadMateriel();
+      let FormatedPeriod = this.dates.join("~");
+      let isPossible = true;
+      this.doc.reservedDates.forEach(element => {
+        let SplittedDates = element.split("~");
+        //if(moment(val).isBetween(SplittedDates[0],SplittedDates[1],undefined,"[]"))
+        if (
+          moment(SplittedDates[0]).isBetween(
+            this.dates[0],
+            this.dates[1],
+            undefined,
+            "[]"
+          ) ||
+          moment(SplittedDates[1]).isBetween(
+            this.dates[0],
+            this.dates[1],
+            undefined,
+            "[]"
+          )
+        ) {
+          isPossible = false;
+        }
+      });
+      if (isPossible) {
+        if (
+          confirm(
+            "Êtes-vous sur de vouloir réserver la période du " +
+              this.dates[0] +
+              " au " +
+              this.dates[1] +
+              " ?"
+          )
+        ) {
+          this.doc.reservedDates.push(this.dates.join("~"));
+          firebase.db
+            .collection("materiel")
+            .doc(this.paramId)
+            .update({
+              reservedDates: this.doc.reservedDates
+            });
+          alert("Votre date a bien été réservée.");
+        }
+      } else {
+        alert(
+          "Cette appareil n'est pas disponible sur la période du " +
+            this.dates[0] +
+            " au " +
+            this.dates[1] +
+            ", veuillez en sélectionner une autre."
+        );
+      }
+      this.loadMateriel();
     }
   },
   mounted() {
