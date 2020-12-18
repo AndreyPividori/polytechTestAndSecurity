@@ -28,11 +28,16 @@
         >
       </p>
       <p class="has-line-data" data-line-start="3" data-line-end="6">
-        Notre cahier de spécification : <a href="">cahier_spec</a>
+        Notre cahier de spécification :
+        <a
+          href="https://firebasestorage.googleapis.com/v0/b/polytech-test-and-security.appspot.com/o/Spec_TestSecurite_v1.pdf?alt=media&token=9ce97dac-ba3b-4abb-9d04-aaa8cdb819bd"
+          onclick="window.open(this.href); return false;"
+          >cahier_spec</a
+        >
       </p>
-      <p class="has-line-data" data-line-start="3" data-line-end="6">
+      <!-- <p class="has-line-data" data-line-start="3" data-line-end="6">
         Notre cahier de tests : <a href="">cahier_test</a>
-      </p>
+      </p> -->
       <p class="has-line-data" data-line-start="3" data-line-end="6">
         L'expression du besoin :
         <a
