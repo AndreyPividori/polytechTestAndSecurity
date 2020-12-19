@@ -129,13 +129,14 @@
             <v-row>
               <v-date-picker
                 v-model="dates"
-                color="blue"
-                header-color="green lighten-1"
+                :dark="true"
+                first-day-of-week="1"
+                :reactive="true"
                 range
                 :allowed-dates="allowedDates"
                 class="mt-4"
                 min="2020-12-01"
-                max="2021-02-01"
+                max=""
               ></v-date-picker>
             </v-row>
             <v-row>
@@ -374,4 +375,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.v-date-picker-table .v-btn.v-btn--active {
+ color:black;
+ background-color:  #44d451 !important;
+}
+</style>
