@@ -377,7 +377,7 @@ export default {
 
 <style>
 .v-date-picker-table .v-btn.v-btn--active {
- color:black;
- background-color:  #44d451 !important;
+  color: black;
+  background-color: #44d451 !important;
 }
 </style>
