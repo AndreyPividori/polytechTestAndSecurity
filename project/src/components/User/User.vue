@@ -100,6 +100,7 @@
       </div>
       <div class="column is-1"></div>
     </div>
+    {{ "oDatas: " + oDatas}}
   </div>
 </template>
 
@@ -121,7 +122,7 @@ export default {
   },
   data() {
     return {
-      dUser: "",
+      dUser: this.oDatas != undefined ? this.oDatas : "",
       isEditting: false,
       paramId: this.id != undefined ? this.id : this.$route.params.id,
       isFormNameCorrect: true,
@@ -143,6 +144,15 @@ export default {
         .get();
 
       this.dUser = userDatas.data();
+    },
+    loadDocIfDirectSearch: async function(collection, id) {
+      if (this.oDatas == undefined) {
+        let uniqDoc = firebase.db.collection(collection).doc(id);
+        let dData = await uniqDoc.get();
+        this.dUser = dData.data();
+      } else {
+        this.dUser = this.oDatas;
+      }
     },
     SaveChanges: function() {
       let userUid = firebase.auth.currentUser.uid;
@@ -199,7 +209,7 @@ export default {
     }
   },
   mounted() {
-    this.getUser();
+    this.loadDocIfDirectSearch("users",this.paramId);
   }
 };
 </script>
