@@ -100,7 +100,6 @@
       </div>
       <div class="column is-1"></div>
     </div>
-    {{ "oDatas: " + oDatas}}
   </div>
 </template>
 
@@ -142,7 +141,6 @@ export default {
         .collection("users")
         .doc(this.paramId)
         .get();
-
       this.dUser = userDatas.data();
     },
     loadDocIfDirectSearch: async function(collection, id) {
@@ -155,7 +153,7 @@ export default {
       }
     },
     SaveChanges: function() {
-      let userUid = firebase.auth.currentUser.uid;
+      let userUid = this.paramId;
 
       let AlphaNumRegEx = new RegExp(
         "^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$"
