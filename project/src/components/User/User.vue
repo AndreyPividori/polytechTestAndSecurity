@@ -91,8 +91,15 @@
               </div>
             </div>
             <div class="has-text-left">
-              <strong>Rôle : </strong>
-              <span>{{ dUser.isAdmin ? "Administrateur" : "Emprunteur" }}</span>
+              <label for="role"><strong> Rôle : </strong></label>
+              <select v-if="dUser.isAdmin" name="role" id="role-selector">
+                <option value="admin">Administrateur</option>
+                <option value="user">Emprunteur</option>
+              </select>
+              <select v-else name="role" id="role-selector">
+                <option value="user">Emprunteur</option>
+                <option value="admin">Administrateur</option>
+              </select>
             </div>
           </div>
           <br />
@@ -158,6 +165,20 @@ export default {
       let AlphaNumRegEx = new RegExp(
         "^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$"
       );
+
+      let sRole = document.getElementById('role-selector').value;
+      let bRole = this.dUser.isAdmin;
+
+      bRole = sRole === "user" ? false : true;
+
+      if(bRole != this.dUser.isAdmin) {
+        if(confirm("Vous êtes sur le point de changer le role de cet utilisateur. \nÊtes-vous sûr ?")){
+          console.log("Ok");
+        }else {
+          console.log("NOK");
+        }
+      }
+
       let sName = document.getElementById("input-field-name").value;
       let sForname = document.getElementById("input-field-forname").value;
       let sMatricule = document.getElementById("input-field-matricule").value;
