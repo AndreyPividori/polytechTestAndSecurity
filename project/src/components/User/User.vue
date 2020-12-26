@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">Profil de {{dUser.forname + " "+ dUser.name }}</h1>
+    <h1 class="title">Profil de {{ dUser.forname + " " + dUser.name }}</h1>
     <div class="columns">
       <div class="column is-1"></div>
       <div class="column is-4">
@@ -166,16 +166,17 @@ export default {
         "^([a-zA-Z0-9\u0600-\u06FF\u0660-\u0669\u06F0-\u06F9 _.-]+)$"
       );
 
-      let sRole = document.getElementById('role-selector').value;
+      let sRole = document.getElementById("role-selector").value;
       let bRole = this.dUser.isAdmin;
 
-
-      
-
-      if(sRole != this.dUser.isAdmin) {
-        if(confirm("Vous êtes sur le point de changer le role de cet utilisateur. \nÊtes-vous sûr ?")){
+      if (sRole != this.dUser.isAdmin) {
+        if (
+          confirm(
+            "Vous êtes sur le point de changer le role de cet utilisateur. \nÊtes-vous sûr ?"
+          )
+        ) {
           bRole = sRole === "user" ? false : true;
-        }else {
+        } else {
           bRole = this.dUser.isAdmin;
         }
       }
@@ -232,7 +233,7 @@ export default {
     }
   },
   mounted() {
-    this.loadDocIfDirectSearch("users",this.paramId);
+    this.loadDocIfDirectSearch("users", this.paramId);
   }
 };
 </script>

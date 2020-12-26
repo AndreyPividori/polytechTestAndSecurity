@@ -36,7 +36,7 @@
             {{ user.forname }}
           </td>
           <td @click="goToUser(user.id, user)">
-            <span>{{user.isAdmin ? "Administrateur" : "Emprunteur" }}</span>
+            <span>{{ user.isAdmin ? "Administrateur" : "Emprunteur" }}</span>
           </td>
           <td @click="goToUser(user.id, user)">
             {{ user.email }}
@@ -77,18 +77,17 @@ export default {
     goToUser(keyDoc, docDatas) {
       let currentUser = firebase.auth.currentUser.uid;
 
-      if(currentUser === keyDoc) {
+      if (currentUser === keyDoc) {
         this.$router.push({
           name: "Profil",
           params: { oDatas: docDatas }
         });
-      }else {
+      } else {
         this.$router.push({
           name: "User",
           params: { id: keyDoc, oDatas: docDatas }
         });
       }
-        
     },
     showPW() {},
     deleteUser(user) {
