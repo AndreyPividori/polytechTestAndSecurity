@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h1 class="title">Profil de {{ dUser.forname + " " + dUser.name }}</h1>
-    <div class="columns">
+
+    <h1 class="title" v-if="!isLoading">Profil de {{ dUser.forname + " " + dUser.name }}</h1>
+    <div class="columns" v-if="!isLoading">
       <div class="column is-1"></div>
       <div class="column is-4">
         <div>
@@ -107,15 +108,19 @@
       </div>
       <div class="column is-1"></div>
     </div>
+    <div v-if="isLoading" >
+      <Loading />
+    </div>
   </div>
 </template>
 
 <script>
+import Loading from "@/components/Utils/Loading";
 import firebase from "@/firebase.js";
 
 export default {
   name: "user",
-  components: {},
+  components: {Loading},
   props: {
     id: {
       type: String,
@@ -128,6 +133,7 @@ export default {
   },
   data() {
     return {
+      isLoading: false,
       dUser: this.oDatas != undefined ? this.oDatas : "",
       isEditting: false,
       paramId: this.id != undefined ? this.id : this.$route.params.id,
@@ -151,13 +157,27 @@ export default {
       this.dUser = userDatas.data();
     },
     loadDocIfDirectSearch: async function(collection, id) {
+      this.isLoading = true;
       if (this.oDatas == undefined) {
         let uniqDoc = firebase.db.collection(collection).doc(id);
         let dData = await uniqDoc.get();
         this.dUser = dData.data();
+        console.log(this.dUser);
+
+        if(this.dUser === undefined) {
+          setTimeout(() => {
+                      this.isLoading = false;
+                      this.$router.push({
+                        name: "Home",
+                      });
+            }, 500);     
+        }
       } else {
         this.dUser = this.oDatas;
+        console.log("toto");
       }
+
+      this.isLoading = false;
     },
     SaveChanges: function() {
       let userUid = this.paramId;

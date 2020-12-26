@@ -72,6 +72,9 @@ const routes = [
       requiresAuth: true
     },
     props: true
+  },
+  { 
+    path: '/:pathMatch(.*)*', redirect: '/'
   }
 ];
 
