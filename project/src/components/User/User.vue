@@ -168,7 +168,7 @@ export default {
           setTimeout(() => {
                       this.isLoading = false;
                       this.$router.push({
-                        name: "Home",
+                        name: "notFound",
                       });
             }, 500);     
         }

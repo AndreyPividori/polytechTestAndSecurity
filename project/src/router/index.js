@@ -73,8 +73,14 @@ const routes = [
     },
     props: true
   },
+  {
+    path: "/pageNotFound",
+    name: "notFound",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/notFound.vue")
+  },
   { 
-    path: '/:pathMatch(.*)*', redirect: '/'
+    path: '/:pathMatch(.*)*', redirect: '/pageNotFound'
   }
 ];
 
