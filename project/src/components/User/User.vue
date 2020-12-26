@@ -1,7 +1,8 @@
 <template>
   <div>
-
-    <h1 class="title" v-if="!isLoading">Profil de {{ dUser.forname + " " + dUser.name }}</h1>
+    <h1 class="title" v-if="!isLoading">
+      Profil de {{ dUser.forname + " " + dUser.name }}
+    </h1>
     <div class="columns" v-if="!isLoading">
       <div class="column is-1"></div>
       <div class="column is-4">
@@ -108,7 +109,7 @@
       </div>
       <div class="column is-1"></div>
     </div>
-    <div v-if="isLoading" >
+    <div v-if="isLoading">
       <Loading />
     </div>
   </div>
@@ -120,7 +121,7 @@ import firebase from "@/firebase.js";
 
 export default {
   name: "user",
-  components: {Loading},
+  components: { Loading },
   props: {
     id: {
       type: String,
@@ -164,13 +165,13 @@ export default {
         this.dUser = dData.data();
         console.log(this.dUser);
 
-        if(this.dUser === undefined) {
+        if (this.dUser === undefined) {
           setTimeout(() => {
-                      this.isLoading = false;
-                      this.$router.push({
-                        name: "notFound",
-                      });
-            }, 500);     
+            this.isLoading = false;
+            this.$router.push({
+              name: "notFound"
+            });
+          }, 500);
         }
       } else {
         this.dUser = this.oDatas;
