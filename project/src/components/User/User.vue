@@ -168,14 +168,13 @@ export default {
 
       let sRole = document.getElementById('role-selector').value;
       let bRole = this.dUser.isAdmin;
-
-      bRole = sRole === "user" ? false : true;
+      
 
       if(bRole != this.dUser.isAdmin) {
         if(confirm("Vous êtes sur le point de changer le role de cet utilisateur. \nÊtes-vous sûr ?")){
-          console.log("Ok");
+          bRole = sRole === "user" ? false : true;
         }else {
-          console.log("NOK");
+          bRole = this.dUser.isAdmin;
         }
       }
 
@@ -220,7 +219,8 @@ export default {
           .update({
             name: document.getElementById("input-field-name").value,
             forname: document.getElementById("input-field-forname").value,
-            matricule: document.getElementById("input-field-matricule").value
+            matricule: document.getElementById("input-field-matricule").value,
+            isAdmin: bRole
           });
         this.getUser();
         this.isEditting = !this.isEditting;
