@@ -79,7 +79,8 @@ export default {
 
       if(currentUser === keyDoc) {
         this.$router.push({
-          name: "Profil"
+          name: "Profil",
+          params: { oDatas: docDatas }
         });
       }else {
         this.$router.push({

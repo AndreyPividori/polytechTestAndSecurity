@@ -112,9 +112,16 @@ import firebase from "@/firebase.js";
 export default {
   name: "Profil",
   components: {},
+  props: {
+    oDatas: {
+      type: Object,
+      required: false
+    }
+  },
   data() {
     return {
-      dUser: "",
+      dUser: this.oDatas != undefined ? this.oDatas : "",
+      idCurrentUser: "",
       isEditting: false,
       isFormNameCorrect: true,
       formNameError: "Erreur : le nom que vous avez renseigné est incorrect.",
@@ -128,6 +135,16 @@ export default {
   },
   computed: {},
   methods: {
+    loadDocIfDirectSearch: async function() {
+      let userId = firebase.auth.currentUser.uid;
+      if (this.oDatas == undefined) {
+        let uniqDoc = firebase.db.collection("users").doc(userId);
+        let dData = await uniqDoc.get();
+        this.dUser = dData.data();
+      } else {
+        this.dUser = this.oDatas;
+      }
+    },
     getUser: async function() {
       let userId = firebase.auth.currentUser;
       let userDatas = await firebase.db
@@ -225,7 +242,7 @@ export default {
     }
   },
   mounted() {
-    this.getUser();
+    this.loadDocIfDirectSearch();
   }
 };
 </script>

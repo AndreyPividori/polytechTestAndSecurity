@@ -48,7 +48,8 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Profil.vue"),
     meta: {
       requiresAuth: true
-    }
+    },
+    props: true
   },
   {
     path: "/materiel/:id",
