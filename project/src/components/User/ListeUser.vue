@@ -75,10 +75,19 @@ export default {
   },
   methods: {
     goToUser(keyDoc, docDatas) {
-      this.$router.push({
-        name: "User",
-        params: { id: keyDoc, oDatas: docDatas }
-      });
+      let currentUser = firebase.auth.currentUser.uid;
+
+      if(currentUser === keyDoc) {
+        this.$router.push({
+          name: "Profil"
+        });
+      }else {
+        this.$router.push({
+          name: "User",
+          params: { id: keyDoc, oDatas: docDatas }
+        });
+      }
+        
     },
     showPW() {},
     deleteUser(user) {

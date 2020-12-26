@@ -63,7 +63,7 @@ const routes = [
     props: true
   },
   {
-    path: "/user/:id",
+    path: "/admin/user/:id",
     name: "User",
     component: () =>
       import(/* webpackChunkName: "about" */ "../components/User/User.vue"),
