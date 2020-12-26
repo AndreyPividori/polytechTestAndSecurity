@@ -36,8 +36,7 @@
             {{ user.forname }}
           </td>
           <td @click="goToUser(user.id, user)">
-            <span v-if="user.isAdmin">Administrateur</span>
-            <span v-else>Utilisateur</span>
+            <span>{{user.isAdmin ? "Administrateur" : "Emprunteur" }}</span>
           </td>
           <td @click="goToUser(user.id, user)">
             {{ user.email }}

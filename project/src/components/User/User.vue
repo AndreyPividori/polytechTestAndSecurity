@@ -168,9 +168,11 @@ export default {
 
       let sRole = document.getElementById('role-selector').value;
       let bRole = this.dUser.isAdmin;
+
+
       
 
-      if(bRole != this.dUser.isAdmin) {
+      if(sRole != this.dUser.isAdmin) {
         if(confirm("Vous êtes sur le point de changer le role de cet utilisateur. \nÊtes-vous sûr ?")){
           bRole = sRole === "user" ? false : true;
         }else {
@@ -207,6 +209,8 @@ export default {
       } else {
         this.isFormMatriculeCorrect = false;
       }
+
+      console.log(bRole);
 
       if (
         this.isFormNameCorrect &&
