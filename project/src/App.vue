@@ -33,9 +33,17 @@
             >Administration</router-link
           >
           <router-link class="navbar-item" to="/about">A propos</router-link>
-          <router-link class="navbar-item" to="/documentation">Documentation</router-link>
-          <a class="navbar-item" target="_blank" rel="noopener noreferrer" href="https://github.com/AndreyPividori/polytechTestAndSecurity.git"> GitHub</a>
-
+          <router-link class="navbar-item" to="/documentation"
+            >Documentation</router-link
+          >
+          <a
+            class="navbar-item"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/AndreyPividori/polytechTestAndSecurity.git"
+          >
+            GitHub</a
+          >
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
@@ -122,6 +130,7 @@ export default {
   }
 }
 
-footer {background-color: #fafafa;
+footer {
+  background-color: #fafafa;
 }
 </style>
