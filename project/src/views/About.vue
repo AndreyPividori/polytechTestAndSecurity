@@ -17,39 +17,6 @@
 
     <br />
 
-    <div class="sources">
-      <h2 class="title is-3">Les sources</h2>
-      <p class="has-line-data" data-line-start="3" data-line-end="6">
-        Notre github :
-        <a
-          href="https://github.com/AndreyPividori/polytechTestAndSecurity.git"
-          onclick="window.open(this.href); return false;"
-          >https://github.com/AndreyPividori/polytechTestAndSecurity.git</a
-        >
-      </p>
-      <p class="has-line-data" data-line-start="3" data-line-end="6">
-        Notre cahier de spécification :
-        <a
-          href="https://firebasestorage.googleapis.com/v0/b/polytech-test-and-security.appspot.com/o/Spec_TestSecurite_v1.pdf?alt=media&token=9ce97dac-ba3b-4abb-9d04-aaa8cdb819bd"
-          onclick="window.open(this.href); return false;"
-          >cahier_spec</a
-        >
-      </p>
-      <!-- <p class="has-line-data" data-line-start="3" data-line-end="6">
-        Notre cahier de tests : <a href="">cahier_test</a>
-      </p> -->
-      <p class="has-line-data" data-line-start="3" data-line-end="6">
-        L'expression du besoin :
-        <a
-          href="https://firebasestorage.googleapis.com/v0/b/polytech-test-and-security.appspot.com/o/T%26S_Expression%20de%20besoins%20v1.1.pdf?alt=media&token=5267646d-e757-4c51-a595-4d8712f62cac"
-          onclick="window.open(this.href); return false;"
-          >TS_Exp_besoins</a
-        >
-      </p>
-    </div>
-
-    <br />
-
     <div class="readme">
       <h2 class="title is-3">L'installation</h2>
       <h3 class="title is-4 code-line" data-line-start="0" data-line-end="1">

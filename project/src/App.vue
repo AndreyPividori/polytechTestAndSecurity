@@ -33,6 +33,9 @@
             >Administration</router-link
           >
           <router-link class="navbar-item" to="/about">A propos</router-link>
+          <router-link class="navbar-item" to="/documentation">Documentation</router-link>
+          <a class="navbar-item" target="_blank" rel="noopener noreferrer" href="https://github.com/AndreyPividori/polytechTestAndSecurity.git"> GitHub</a>
+
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
@@ -57,7 +60,7 @@
       </div>
     </nav>
     <router-view />
-    <footer class="footer">
+    <footer class="">
       <div class="content has-text-centered">
         <p>
           <strong>Projet Test & Sécurité - Polytech Tours</strong>
@@ -119,7 +122,6 @@ export default {
   }
 }
 
-footer {
-  margin-top: 2em;
+footer {background-color: #fafafa;
 }
 </style>
