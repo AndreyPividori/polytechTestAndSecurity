@@ -71,7 +71,7 @@
                     ><input
                       type="radio"
                       id="role-admin"
-                      value="true"
+                      :value="true"
                       v-model.trim="signupForm.role"
                     />
                     Administrateur</label
@@ -81,7 +81,7 @@
                     ><input
                       type="radio"
                       id="role-other"
-                      value="false"
+                      :value="false"
                       v-model.trim="signupForm.role"
                       checked
                     />
