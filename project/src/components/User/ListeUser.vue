@@ -91,11 +91,13 @@ export default {
     },
     showPW() {},
     deleteUser(user) {
-      firebase.db
-        .collection("users")
-        .doc(user.id)
-        .delete();
-      this.$store.dispatch("getAllDocsFromCollection", "users");
+      if(confirm("Êtes-vous sûr de supprimer l'user suivant : " + user.name + user.forname + "?")) {
+        firebase.db
+          .collection("users")
+          .doc(user.id)
+          .delete();
+        this.$store.dispatch("getAllDocsFromCollection", "users");
+      }
     }
   },
   mounted() {

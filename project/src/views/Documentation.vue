@@ -39,8 +39,7 @@
         height="680px"
         style="border:solid black 1px"
       ></iframe>
-      <!-- <iframe v-if="showCahierRecette" src="" width="100%" height="680px" style="border:solid black 1px"></iframe> -->
-      <div v-if="showCahierRecette">Cahier de recette à venir.</div>
+      <iframe v-if="showCahierRecette" src="https://firebasestorage.googleapis.com/v0/b/polytech-test-and-security.appspot.com/o/Cahier%20de%20recette.pdf?alt=media&token=e4ad4c6e-229c-43ab-b283-e61a5b7e6dcd" width="100%" height="680px" style="border:solid black 1px"></iframe>
     </div>
   </div>
 </template>
