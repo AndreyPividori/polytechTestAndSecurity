@@ -33,7 +33,7 @@
             style="vertical-align:middle;"
           >
             {{ index + 1 }}
-            <span v-if="materiel.available" class="tag is-success"
+            <span v-if="isMaterielAvailable(materiel.reservedDates)" class="tag is-success"
               >Disponible</span
             >
             <span v-else class="tag is-danger">Indisponible</span>
@@ -93,6 +93,7 @@
 import firebase from "@/firebase.js";
 import Loading from "@/components/Utils/Loading";
 import SpinnerDelete from "@/components/Utils/SpinnerDelete";
+import moment from "moment";
 import { mapState } from "vuex";
 
 export default {
@@ -147,6 +148,25 @@ export default {
       }
 
       this.$store.dispatch("getAllDocsFromCollection", "materiel");
+    },
+    isMaterielAvailable(aDates) {
+      let isMaterielAvailable = false
+
+      if (aDates.length > 0) {
+        aDates.forEach(d => {
+          let aLocalDates = d.split("~")
+          if (moment().isBetween(aLocalDates[0],aLocalDates[1])) {
+            isMaterielAvailable = false
+          }else {
+            isMaterielAvailable = true
+          }
+        });
+      }else {
+        isMaterielAvailable = true
+      }
+
+      
+      return isMaterielAvailable;
     }
   },
   mounted() {
