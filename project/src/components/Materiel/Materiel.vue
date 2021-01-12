@@ -399,4 +399,8 @@ export default {
   color: black;
   background-color: #44d451 !important;
 }
+.columns {
+	margin-top: 5px;
+	margin-bottom: 10px !important;
+}
 </style>
