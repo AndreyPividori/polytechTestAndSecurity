@@ -29,7 +29,9 @@
         <div style="padding-top: 5em;">
           <div class="has-text-left">
             <strong>Statut : </strong>
-            <span v-if="isMaterielAvailable(doc.reservedDates)">Disponible ✅</span>
+            <span v-if="isMaterielAvailable(doc.reservedDates)"
+              >Disponible ✅</span
+            >
             <span v-else>Indisponible 🚫</span>
           </div>
           <div v-if="!isEditting">
@@ -369,22 +371,21 @@ export default {
       this.loadMateriel();
     },
     isMaterielAvailable(aDates) {
-      let isMaterielAvailable = false
+      let isMaterielAvailable = false;
 
       if (aDates.length > 0) {
         aDates.forEach(d => {
-          let aLocalDates = d.split("~")
-          if (moment().isBetween(aLocalDates[0],aLocalDates[1])) {
-            isMaterielAvailable = false
-          }else {
-            isMaterielAvailable = true
+          let aLocalDates = d.split("~");
+          if (moment().isBetween(aLocalDates[0], aLocalDates[1])) {
+            isMaterielAvailable = false;
+          } else {
+            isMaterielAvailable = true;
           }
         });
-      }else {
-        isMaterielAvailable = true
+      } else {
+        isMaterielAvailable = true;
       }
 
-      
       return isMaterielAvailable;
     }
   },
@@ -400,7 +401,7 @@ export default {
   background-color: #44d451 !important;
 }
 .columns {
-	margin-top: 5px;
-	margin-bottom: 10px !important;
+  margin-top: 5px;
+  margin-bottom: 10px !important;
 }
 </style>

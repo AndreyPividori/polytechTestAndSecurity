@@ -33,7 +33,9 @@
             style="vertical-align:middle;"
           >
             {{ index + 1 }}
-            <span v-if="isMaterielAvailable(materiel.reservedDates)" class="tag is-success"
+            <span
+              v-if="isMaterielAvailable(materiel.reservedDates)"
+              class="tag is-success"
               >Disponible</span
             >
             <span v-else class="tag is-danger">Indisponible</span>
@@ -150,22 +152,21 @@ export default {
       this.$store.dispatch("getAllDocsFromCollection", "materiel");
     },
     isMaterielAvailable(aDates) {
-      let isMaterielAvailable = false
+      let isMaterielAvailable = false;
 
       if (aDates.length > 0) {
         aDates.forEach(d => {
-          let aLocalDates = d.split("~")
-          if (moment().isBetween(aLocalDates[0],aLocalDates[1])) {
-            isMaterielAvailable = false
-          }else {
-            isMaterielAvailable = true
+          let aLocalDates = d.split("~");
+          if (moment().isBetween(aLocalDates[0], aLocalDates[1])) {
+            isMaterielAvailable = false;
+          } else {
+            isMaterielAvailable = true;
           }
         });
-      }else {
-        isMaterielAvailable = true
+      } else {
+        isMaterielAvailable = true;
       }
 
-      
       return isMaterielAvailable;
     }
   },

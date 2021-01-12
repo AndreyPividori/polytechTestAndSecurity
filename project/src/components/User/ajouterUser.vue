@@ -239,8 +239,13 @@ export default {
         this.isPassWordCorrect = false;
       }
 
-      if(this.isNameCorrect && this.isForNameCorrect && this.isMatriculeCorrect && this.isPassWordCorrect && this.isEmailCorrect) {
-
+      if (
+        this.isNameCorrect &&
+        this.isForNameCorrect &&
+        this.isMatriculeCorrect &&
+        this.isPassWordCorrect &&
+        this.isEmailCorrect
+      ) {
         firebase.db
           .collection("users")
           .where("email", "==", this.signupForm.email)
@@ -254,9 +259,9 @@ export default {
               _this.isLoading = true;
               let adminPW = _this.$store.state.userProfile.password;
               let adminEdmail = _this.$store.state.userProfile.email;
-  
+
               _this.$store.dispatch("logout");
-  
+
               _this.$store
                 .dispatch("signup", {
                   email: _this.signupForm.email,
@@ -281,9 +286,7 @@ export default {
               alert("Email déjà existant !");
             }
           });
-
       }
-
     },
     relogAsAdmin(email, pw) {
       this.$store.dispatch("logout");
