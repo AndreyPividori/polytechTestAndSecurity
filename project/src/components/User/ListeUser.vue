@@ -91,7 +91,7 @@ export default {
     },
     showPW() {},
     deleteUser(user) {
-      if(confirm("Êtes-vous sûr de supprimer l'user suivant : " + user.name + user.forname + "?")) {
+      if(confirm("Êtes-vous sûr de supprimer l'user suivant : " + user.name +" "+ user.forname + "?")) {
         firebase.db
           .collection("users")
           .doc(user.id)

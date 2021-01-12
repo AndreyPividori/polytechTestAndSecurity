@@ -239,46 +239,51 @@ export default {
         this.isPassWordCorrect = false;
       }
 
-      firebase.db
-        .collection("users")
-        .where("email", "==", this.signupForm.email)
-        .get()
-        .then(function(querySnapshot) {
-          querySnapshot.forEach(function(doc) {
-            // doc.data() is never undefined for query doc snapshots
-            (dDoc = doc.id), " => ", doc.data();
+      if(this.isNameCorrect && this.isForNameCorrect && this.isMatriculeCorrect && this.isPassWordCorrect && this.isEmailCorrect) {
+
+        firebase.db
+          .collection("users")
+          .where("email", "==", this.signupForm.email)
+          .get()
+          .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+              // doc.data() is never undefined for query doc snapshots
+              (dDoc = doc.id), " => ", doc.data();
+            });
+            if (dDoc === null) {
+              _this.isLoading = true;
+              let adminPW = _this.$store.state.userProfile.password;
+              let adminEdmail = _this.$store.state.userProfile.email;
+  
+              _this.$store.dispatch("logout");
+  
+              _this.$store
+                .dispatch("signup", {
+                  email: _this.signupForm.email,
+                  password: _this.signupForm.password,
+                  matricule: _this.signupForm.matricule,
+                  role: _this.signupForm.role,
+                  name: _this.signupForm.name,
+                  forname: _this.signupForm.forname
+                })
+                .then(function() {
+                  _this.relogAsAdmin(adminEdmail, adminPW);
+                  _this.$store
+                    .dispatch("getAllDocsFromCollection", "users")
+                    .then(function() {
+                      setTimeout(() => {
+                        _this.isLoading = false;
+                        _this.close();
+                      }, 500);
+                    });
+                });
+            } else {
+              alert("Email déjà existant !");
+            }
           });
-          if (dDoc === null) {
-            _this.isLoading = true;
-            let adminPW = _this.$store.state.userProfile.password;
-            let adminEdmail = _this.$store.state.userProfile.email;
 
-            _this.$store.dispatch("logout");
+      }
 
-            _this.$store
-              .dispatch("signup", {
-                email: _this.signupForm.email,
-                password: _this.signupForm.password,
-                matricule: _this.signupForm.matricule,
-                role: _this.signupForm.role,
-                name: _this.signupForm.name,
-                forname: _this.signupForm.forname
-              })
-              .then(function() {
-                _this.relogAsAdmin(adminEdmail, adminPW);
-                _this.$store
-                  .dispatch("getAllDocsFromCollection", "users")
-                  .then(function() {
-                    setTimeout(() => {
-                      _this.isLoading = false;
-                      _this.close();
-                    }, 500);
-                  });
-              });
-          } else {
-            alert("Email déjà existant !");
-          }
-        });
     },
     relogAsAdmin(email, pw) {
       this.$store.dispatch("logout");
