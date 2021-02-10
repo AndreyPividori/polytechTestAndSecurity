@@ -318,62 +318,67 @@ export default {
       }
     },
     confirmDate() {
-      this.loadMateriel();
-      let isPossible = true;
-      this.doc.reservedDates.forEach(element => {
-        let SplittedDates = element.split("~");
-        //if(moment(val).isBetween(SplittedDates[0],SplittedDates[1],undefined,"[]"))
-        if (
-          moment(SplittedDates[0]).isBetween(
-            this.dates[0],
-            this.dates[1],
-            undefined,
-            "[]"
-          ) ||
-          moment(SplittedDates[1]).isBetween(
-            this.dates[0],
-            this.dates[1],
-            undefined,
-            "[]"
-          )
-        ) {
-          isPossible = false;
-        }
-      });
-      if (isPossible) {
-        if (
-          confirm(
-            "Êtes-vous sur de vouloir réserver la période du " +
+      if(this.dates.length > 1 && this.dates[0] != null && this.dates[0] != undefined && this.dates[1] != null && this.dates[1]){
+        this.loadMateriel();
+        let isPossible = true;
+        this.doc.reservedDates.forEach(element => {
+          let SplittedDates = element.split("~");
+          //if(moment(val).isBetween(SplittedDates[0],SplittedDates[1],undefined,"[]"))
+          if (
+            moment(SplittedDates[0]).isBetween(
+              this.dates[0],
+              this.dates[1],
+              undefined,
+              "[]"
+            ) ||
+            moment(SplittedDates[1]).isBetween(
+              this.dates[0],
+              this.dates[1],
+              undefined,
+              "[]"
+            )
+          ) {
+            isPossible = false;
+          }
+        });
+        if (isPossible) {
+          if (
+            confirm(
+              "Êtes-vous sur de vouloir réserver la période du " +
+                this.dates[0] +
+                " au " +
+                this.dates[1] +
+                " ?"
+            )
+          ) {
+            this.doc.reservedDates.push(this.dates.join("~"));
+            firebase.db
+              .collection("materiel")
+              .doc(this.paramId)
+              .update({
+                reservedDates: this.doc.reservedDates
+              });
+            alert("Votre date a bien été réservée.");
+          }
+        } else {
+          alert(
+            "Cette appareil n'est pas disponible sur la période du " +
               this.dates[0] +
               " au " +
               this.dates[1] +
-              " ?"
-          )
-        ) {
-          this.doc.reservedDates.push(this.dates.join("~"));
-          firebase.db
-            .collection("materiel")
-            .doc(this.paramId)
-            .update({
-              reservedDates: this.doc.reservedDates
-            });
-          alert("Votre date a bien été réservée.");
+              ", veuillez en sélectionner une autre."
+          );
         }
+        this.loadMateriel();
       } else {
-        alert(
-          "Cette appareil n'est pas disponible sur la période du " +
-            this.dates[0] +
-            " au " +
-            this.dates[1] +
-            ", veuillez en sélectionner une autre."
-        );
+        alert("Une des deux dates renseignée n'est pas possible ou n'est pas définie.")
       }
-      this.loadMateriel();
+      
     },
     isMaterielAvailable(aDates) {
       let isMaterielAvailable = false;
 
-      if (aDates.length > 0) {
+      if (aDates!= undefined && aDates.length > 0) {
         aDates.forEach(d => {
           let aLocalDates = d.split("~");
           if (moment().isBetween(aLocalDates[0], aLocalDates[1])) {
