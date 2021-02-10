@@ -22,6 +22,13 @@
           @click="showPDF(3)"
           >Cahier de recette</a
         >
+        |
+        <a
+          class="tag is-medium"
+          :class="showCahierTest ? 'is-info' : 'is-link is-light'"
+          @click="showPDF(4)"
+          >Cahier de tests</a
+        >
       </div>
     </div>
     <div>
@@ -46,6 +53,13 @@
         height="680px"
         style="border:solid black 1px"
       ></iframe>
+      <iframe
+        v-if="showCahierTest"
+        src="https://firebasestorage.googleapis.com/v0/b/polytech-test-and-security.appspot.com/o/Cahier_tests.pdf?alt=media&token=6652c77c-d4d7-4357-b52e-c4921cc18e20"
+        width="100%"
+        height="680px"
+        style="border:solid black 1px"
+      ></iframe>
     </div>
   </div>
 </template>
@@ -58,7 +72,8 @@ export default {
     return {
       showExpressionBesoin: true,
       showCahierSpecif: false,
-      showCahierRecette: false
+      showCahierRecette: false,
+      showCahierTest: false
     };
   },
   methods: {
@@ -67,14 +82,22 @@ export default {
         this.showExpressionBesoin = true;
         this.showCahierSpecif = false;
         this.showCahierRecette = false;
+        this.showCahierTest = false;
       } else if (iPage === 2) {
         this.showExpressionBesoin = false;
         this.showCahierSpecif = true;
         this.showCahierRecette = false;
-      } else {
+        this.showCahierTest = false;
+      } else if(iPage === 3){
         this.showExpressionBesoin = false;
         this.showCahierSpecif = false;
         this.showCahierRecette = true;
+        this.showCahierTest = false;
+      }else {
+        this.showExpressionBesoin = false;
+        this.showCahierSpecif = false;
+        this.showCahierRecette = false;
+        this.showCahierTest = true;
       }
     }
   }
