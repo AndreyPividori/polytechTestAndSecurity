@@ -318,7 +318,13 @@ export default {
       }
     },
     confirmDate() {
-      if(this.dates.length > 1 && this.dates[0] != null && this.dates[0] != undefined && this.dates[1] != null && this.dates[1]){
+      if (
+        this.dates.length > 1 &&
+        this.dates[0] != null &&
+        this.dates[0] != undefined &&
+        this.dates[1] != null &&
+        this.dates[1]
+      ) {
         this.loadMateriel();
         let isPossible = true;
         this.doc.reservedDates.forEach(element => {
@@ -371,14 +377,15 @@ export default {
         }
         this.loadMateriel();
       } else {
-        alert("Une des deux dates renseignée n'est pas possible ou n'est pas définie.")
+        alert(
+          "Une des deux dates renseignée n'est pas possible ou n'est pas définie."
+        );
       }
-      
     },
     isMaterielAvailable(aDates) {
       let isMaterielAvailable = false;
 
-      if (aDates!= undefined && aDates.length > 0) {
+      if (aDates != undefined && aDates.length > 0) {
         aDates.forEach(d => {
           let aLocalDates = d.split("~");
           if (moment().isBetween(aLocalDates[0], aLocalDates[1])) {
