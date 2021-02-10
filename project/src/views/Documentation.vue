@@ -88,12 +88,12 @@ export default {
         this.showCahierSpecif = true;
         this.showCahierRecette = false;
         this.showCahierTest = false;
-      } else if(iPage === 3){
+      } else if (iPage === 3) {
         this.showExpressionBesoin = false;
         this.showCahierSpecif = false;
         this.showCahierRecette = true;
         this.showCahierTest = false;
-      }else {
+      } else {
         this.showExpressionBesoin = false;
         this.showCahierSpecif = false;
         this.showCahierRecette = false;
